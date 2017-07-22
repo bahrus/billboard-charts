@@ -1,6 +1,8 @@
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/bahrus/billboard-charts)
+
 # \<billboard-charts\>
 
-Billboard charts
+\<billboard-charts\> is a web component wrapper around the [billboard.js](https://naver.github.io/billboard.js/) hit library.
 
 ## Install the Polymer-CLI
 
