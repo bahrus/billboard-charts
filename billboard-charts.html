@@ -1,36 +1,17 @@
-<link rel="import" href="../polymer/polymer-element.html">
-
-<dom-module id="billboard-charts">
+<!DOCTYPE html>
+<link async rel="import" href="../poly-prep/poly-prep.html">
+<link rel="import" href="../shadycss/apply-shim.html">
+<dom-module id="xtal-chart-istic">
   <template>
+    <style include="xtal-chart-istic-theme"></style>
     <style>
       :host {
         display: block;
+        @apply --my-custom-chart-istic-mixin;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <div id="chartTarget"></div>
   </template>
-
-  <script>
-    /**
-     * `billboard-charts`
-     * Billboard charts
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
-     */
-    class BillboardCharts extends Polymer.Element {
-      static get is() { return 'billboard-charts'; }
-      static get properties() {
-        return {
-          prop1: {
-            type: String,
-            value: 'billboard-charts'
-          }
-        };
-      }
-    }
-
-    window.customElements.define(BillboardCharts.is, BillboardCharts);
-  </script>
+  <script async src="../chartist/dist/chartist.js"></script>
+  <script async src="xtal-chart-istic.js"></script>
 </dom-module>
