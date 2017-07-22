@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <link async rel="import" href="../poly-prep/poly-prep.html">
-<link rel="import" href="../shadycss/apply-shim.html">
-<dom-module id="xtal-chart-istic">
+<dom-module id="billboard-charts">
   <template>
-    <style include="xtal-chart-istic-theme"></style>
+    
     <style>
       :host {
         display: block;
-        @apply --my-custom-chart-istic-mixin;
+        /* @apply --my-custom-chart-istic-mixin; */
       }
     </style>
     <div id="chartTarget"></div>
   </template>
-  <script async src="../chartist/dist/chartist.js"></script>
-  <script async src="xtal-chart-istic.js"></script>
+  <script src="../d3/d3.js"></script>
+  <script src="../billboard.js/dist/billboard.js"></script>
+  
+  <script async src="billboard-charts.js"></script>
 </dom-module>
