@@ -26,13 +26,17 @@
         <link async rel="import" href="../../iron-demo-helpers/demo-snippet.html">
         <link async rel="import" href="../../polymer/lib/elements/dom-bind.html">
         <link async rel="import" href="../billboard-charts.html">
+        <link async rel="import" href="../../xtal-json-editor/xtal-json-editor.html">
+        <link async rel="import" href="../../polymer/lib/elements/dom-bind.html">
       </template>
     </full-poly-prep>
     <demo-snippet>
       <template>
         <dom-module id="my-component">
           <template>
-            <billboard-charts publish results="[[example1]]"></billboard-charts>
+              Click on a data point to see the data element below.
+              <billboard-charts publish data="[[example1]]" selected-element ="{{selectedDataPoint}}"></billboard-charts>
+              <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
           </template>
         </dom-module>
         <script>
@@ -62,7 +66,7 @@
                         15,
                         25
                       ]
-                    ]
+                    ],
                   },
                 }
               }

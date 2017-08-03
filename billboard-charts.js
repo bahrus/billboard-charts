@@ -24,27 +24,38 @@ var xtal;
                             type: Boolean,
                             observer: 'onPropsChange'
                         },
-                        results: {
+                        data: {
                             type: Object,
                             observer: 'onPropsChange'
                         },
                         newData: {
                             type: Object,
                             observer: 'onNewData'
+                        },
+                        selectedElement: {
+                            type: Object,
+                            readOnly: true,
+                            notify: true,
                         }
                     };
                 }
                 onPropsChange() {
-                    if (!this.publish || !this.results)
+                    if (!this.publish || !this.data || !this.data.data)
                         return;
-                    this.results.bindto = this.$.chartTarget;
+                    this.data.bindto = this.$.chartTarget;
+                    if (!this.data.data.onclick) {
+                        //debugger;
+                        this.data.data.onclick = (dataPoint, element) => {
+                            this['_setSelectedElement'](dataPoint);
+                        };
+                    }
                     if (!this._chart) {
-                        this._chart = bb.generate(this.results);
+                        this._chart = bb.generate(this.data);
                         if (this.newData)
                             this.onNewData();
                     }
                     else {
-                        this._chart = bb.generate(this.results);
+                        this._chart = bb.generate(this.data);
                     }
                 }
                 onNewData() {

@@ -2,8 +2,9 @@ module xtal.elements{
     declare var bb;
     export interface IBillboardChartsProperties{
         publish: boolean | polymer.PropObjectType,
-        results: any | polymer.PropObjectType,
+        data: any | polymer.PropObjectType,
         newData: object | polymer.PropObjectType,
+        selectedElement: object | polymer.PropObjectType,
     }
     function initBillboardCharts(){
         if(customElements.get('billboard-charts')) return;
@@ -16,7 +17,7 @@ module xtal.elements{
          * @demo demo/index.html
          */        
         class BillboardCharts extends Polymer.Element implements IBillboardChartsProperties{
-            publish: boolean; results: any; newData: object;
+            publish: boolean; data: any; newData: object; selectedElement: object;
             private _chart: any;
             get chart(){
                 return this._chart;
@@ -28,24 +29,35 @@ module xtal.elements{
                         type: Boolean,
                         observer: 'onPropsChange'
                     },
-                    results: {
+                    data: {
                         type: Object,
                         observer: 'onPropsChange'
                     },
                     newData:{
                         type: Object,
                         observer: 'onNewData'
+                    },
+                    selectedElement:{
+                        type: Object,
+                        readOnly: true,
+                        notify: true,
                     }
                 }
             }
             onPropsChange(){
-                if(!this.publish || !this.results) return;
-                this.results.bindto = this.$.chartTarget;
+                if(!this.publish || !this.data || !this.data.data) return;
+                this.data.bindto = this.$.chartTarget;
+                if(!this.data.data.onclick){
+                    //debugger;
+                    this.data.data.onclick = (dataPoint, element) =>{
+                        this['_setSelectedElement'](dataPoint);
+                    }
+                }
                 if(!this._chart){
-                    this._chart = bb.generate(this.results);
+                    this._chart = bb.generate(this.data);
                     if(this.newData) this.onNewData();
                 }else{
-                    this._chart = bb.generate(this.results);
+                    this._chart = bb.generate(this.data);
                 }
                 
             }

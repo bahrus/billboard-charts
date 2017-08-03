@@ -4,6 +4,8 @@
 
 \<billboard-charts\> is a web component wrapper around the [billboard.js](https://naver.github.io/billboard.js/) hit library.
 
+Features include "master-detail" functionality -- clicking on a data element can post the element to peer componennts.
+
 ## Install the Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
