@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>billboard-charts demo</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+
+    </style>
+  </custom-style>
+</head>
+
+<body>
+  <div class="vertical-section-container centered">
+    <h3>Basic billboard-charts demo</h3>
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="../billboard-charts-sync.html">
+    <link rel="import" href="../../xtal-json-editor/xtal-json-editor-sync.html">
+    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+    <demo-snippet>
+      <template>
+        <dom-module id="my-component">
+          <template>
+              Click on a data point to see the data element below.
+              <billboard-charts publish data="[[example1]]" selected-element ="{{selectedDataPoint}}"></billboard-charts>
+              <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
+          </template>
+        </dom-module>
+        <script>
+          function initMyComponent() {
+            class MyComponent extends Polymer.Element {
+              static get is() { return 'my-component'; }
+              connectedCallback() {
+                super.connectedCallback();
+                this.example1 = {
+                  "data": {
+                    "columns": [
+                      [
+                        "Despacito",
+                        30,
+                        200,
+                        100,
+                        400,
+                        150,
+                        250
+                      ],
+                      [
+                        "Wild Thoughts",
+                        50,
+                        20,
+                        10,
+                        40,
+                        15,
+                        25
+                      ]
+                    ],
+                  },
+                }
+              }
+            }
+            customElements.define(MyComponent.is, MyComponent);
+          }
+          customElements.whenDefined('billboard-charts').then(() => initMyComponent());
+        </script>
+        <my-component></my-component>
+      </template>
+    </demo-snippet>
+  </div>
+</body>
+
+</html>

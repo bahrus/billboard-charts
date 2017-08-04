@@ -70,7 +70,7 @@ module xtal.elements{
         customElements.define(BillboardCharts.is, BillboardCharts);
     }
 
-    const syncFlag = 'billboard-charts_sync';
+    const syncFlag = 'billboard_charts_sync';
     if(window[syncFlag]){
         customElements.whenDefined('poly-prep-sync').then(() => initBillboardCharts());
         delete window[syncFlag];
