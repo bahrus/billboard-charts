@@ -68,7 +68,10 @@
             }
             customElements.define(MyComponent.is, MyComponent);
           }
-          customElements.whenDefined('billboard-charts').then(() => initMyComponent());
+          setTimeout(() =>{
+            customElements.whenDefined('billboard-charts').then(() => initMyComponent());
+          }, 500); //delay necessary to prevent legend from overlapping.  Not sure why this is needed.
+          
         </script>
         <my-component></my-component>
       </template>
