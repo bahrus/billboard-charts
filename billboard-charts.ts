@@ -19,6 +19,7 @@ module xtal.elements{
         class BillboardCharts extends Polymer.Element implements IBillboardChartsProperties{
             publish: boolean; data: any; newData: object; selectedElement: object;
             private _chart: any;
+            private _cssLoaded = false;
             get chart(){
                 return this._chart;
             }
@@ -44,7 +45,12 @@ module xtal.elements{
                     }
                 }
             }
+            loaded(){
+                this._cssLoaded = true;
+                this.onPropsChange();
+            }
             onPropsChange(){
+                if(!this._cssLoaded) return;
                 if(!this.publish || !this.data || !this.data.data) return;
                 this.data.bindto = this.$.chartTarget;
                 if(!this.data.data.onclick){

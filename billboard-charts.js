@@ -14,6 +14,10 @@ var xtal;
              * @demo demo/index.html
              */
             class BillboardCharts extends Polymer.Element {
+                constructor() {
+                    super(...arguments);
+                    this._cssLoaded = false;
+                }
                 get chart() {
                     return this._chart;
                 }
@@ -39,7 +43,13 @@ var xtal;
                         }
                     };
                 }
+                loaded() {
+                    this._cssLoaded = true;
+                    this.onPropsChange();
+                }
                 onPropsChange() {
+                    if (!this._cssLoaded)
+                        return;
                     if (!this.publish || !this.data || !this.data.data)
                         return;
                     this.data.bindto = this.$.chartTarget;
