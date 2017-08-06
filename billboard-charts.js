@@ -24,6 +24,10 @@ var xtal;
                 static get is() { return 'billboard-charts'; }
                 static get properties() {
                     return {
+                        cssPath: {
+                            type: String,
+                            value: '../../billboard.js/dist/billboard.css'
+                        },
                         publish: {
                             type: Boolean,
                             observer: 'onPropsChange'

@@ -1,6 +1,7 @@
 module xtal.elements{
     declare var bb;
     export interface IBillboardChartsProperties{
+        cssPath: string | polymer.PropObjectType,
         publish: boolean | polymer.PropObjectType,
         data: any | polymer.PropObjectType,
         newData: object | polymer.PropObjectType,
@@ -17,7 +18,7 @@ module xtal.elements{
          * @demo demo/index.html
          */        
         class BillboardCharts extends Polymer.Element implements IBillboardChartsProperties{
-            publish: boolean; data: any; newData: object; selectedElement: object;
+            publish: boolean; data: any; newData: object; selectedElement: object; cssPath;
             private _chart: any;
             private _cssLoaded = false;
             get chart(){
@@ -26,6 +27,10 @@ module xtal.elements{
             static get is(){return 'billboard-charts';}
             static get properties() : IBillboardChartsProperties{
                 return{
+                    cssPath:{
+                        type: String,
+                        value: '../../billboard.js/dist/billboard.css'
+                    },
                     publish: {
                         type: Boolean,
                         observer: 'onPropsChange'
