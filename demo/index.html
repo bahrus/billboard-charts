@@ -35,7 +35,7 @@
         <dom-module id="my-component">
           <template>
               Click on a data point to see the data element below.
-              <billboard-charts publish data="[[example1]]" selected-element ="{{selectedDataPoint}}"></billboard-charts>
+              <billboard-charts id="bc" publish data="[[example1]]" selected-element ="{{selectedDataPoint}}"></billboard-charts>
               <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
           </template>
         </dom-module>
@@ -69,6 +69,27 @@
                     ],
                   },
                 }
+                setTimeout(() => {
+                  this.$.bc.newData = {
+                    columns: [
+                      ['data1', 230, 190, 300, 500, 300, 400]
+                    ]
+                  };
+                }, 1000);
+
+                setTimeout(() => {
+                  this.$.bc.newData = {
+                    columns: [
+                      ['data3', 130, 150, 200, 300, 200, 100]
+                    ]
+                  };
+                }, 1500);
+
+                setTimeout(() => {
+                  this.$.bc.newData = {
+                    ids: 'data1'
+                  };
+                }, 2000);
               }
             }
             customElements.define(MyComponent.is, MyComponent);

@@ -60,9 +60,9 @@ module xtal.elements{
                 this.data.bindto = this.$.chartTarget;
                 if(!this.data.data.onclick){
                     //debugger;
-                    this.data.data.onclick = (dataPoint, element) =>{
-                        this['_setSelectedElement'](dataPoint);
-                    }
+                    // this.data.data.onclick = (dataPoint, element) =>{
+                    //     this['_setSelectedElement'](dataPoint);
+                    // }
                 }
                 if(!this._chart){
                     this._chart = bb.generate(this.data);
