@@ -13,8 +13,9 @@
          */
         class BillboardCharts extends Polymer.Element {
             constructor() {
-                super(...arguments);
+                super();
                 this._cssLoaded = false;
+                console.log('in constructor');
             }
             get chart() {
                 return this._chart;
@@ -36,6 +37,7 @@
             }
             connectedCallback() {
                 super.connectedCallback();
+                console.log('in connected Callback');
                 if (!this.cssPath) {
                     if (cs) {
                         this.cssPath = this.absolute(cs.baseURI, '../billboard.js/dist/billboard.css');
@@ -47,7 +49,6 @@
             }
             static get is() { return 'billboard-charts'; }
             static get properties() {
-                console.log({ currentScript: document.currentScript });
                 return {
                     cssPath: {
                         type: String
@@ -76,6 +77,7 @@
                 this.onPropsChange();
             }
             onPropsChange() {
+                console.log('in onPropsChange');
                 if (!this._cssLoaded)
                     return;
                 if (!this.publish || !this.data || !this.data.data)
@@ -102,9 +104,11 @@
                 }
             }
         }
+        console.log('registering BillboardCharts');
         customElements.define(BillboardCharts.is, BillboardCharts);
     }
     function WaitForPolymer() {
+        console.log('waiting for polymer');
         cs = document.currentScript;
         if ((typeof Polymer !== 'function') || (typeof Polymer.Element !== 'function')) {
             setTimeout(WaitForPolymer, 100);
