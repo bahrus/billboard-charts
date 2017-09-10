@@ -1,12 +1,14 @@
-module xtal.elements{
-    declare var bb;
-    export interface IBillboardChartsProperties{
-        cssPath: string | polymer.PropObjectType,
-        publish: boolean | polymer.PropObjectType,
-        data: any | polymer.PropObjectType,
-        newData: object | polymer.PropObjectType,
-        selectedElement: object | polymer.PropObjectType,
-    }
+export interface IBillboardChartsProperties{
+    cssPath: string | polymer.PropObjectType,
+    publish: boolean | polymer.PropObjectType,
+    data: any | polymer.PropObjectType,
+    newData: object | polymer.PropObjectType,
+    selectedElement: object | polymer.PropObjectType,
+}
+declare var bb;
+(function () {
+    
+    let cs;
     function initBillboardCharts(){
         if(customElements.get('billboard-charts')) return;
         /**
@@ -43,7 +45,6 @@ module xtal.elements{
             connectedCallback(){
                 super.connectedCallback();
                 if(!this.cssPath){
-                    const cs = document.currentScript;
                     if(cs){
                         this.cssPath = this.absolute(cs.baseURI, '../billboard.js/dist/billboard.css');
                     }else{
@@ -108,17 +109,14 @@ module xtal.elements{
         customElements.define(BillboardCharts.is, BillboardCharts);
     }
 
-    const syncFlag = 'billboard_charts_sync';
-    if(window[syncFlag]){
-        customElements.whenDefined('poly-prep-sync').then(() => initBillboardCharts());
-        delete window[syncFlag];
-    }else{
-        if(customElements.get('poly-prep') || customElements.get('full-poly-prep')){
-            initBillboardCharts();
-        }else{
-            customElements.whenDefined('poly-prep').then(() => initBillboardCharts());
-            customElements.whenDefined('full-poly-prep').then(() => initBillboardCharts());
+    function WaitForPolymer()
+    {
+        cs = document.currentScript;
+        if ((typeof Polymer !== 'function') || (typeof Polymer.Element !== 'function')) {
+           setTimeout( WaitForPolymer, 100);
+           return;
         }
-    
+        initBillboardCharts();
     }
-}
+    WaitForPolymer();
+})();

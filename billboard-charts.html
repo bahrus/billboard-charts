@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<link async rel="import" href="../poly-prep/poly-prep.html">
+<link rel="import" href="../polymer/polymer-element.html">
+
 <dom-module id="billboard-charts">
   <template>
-    <link id="extCss" on-load="loaded" async rel="stylesheet" type="text/css"  href="[[cssPath]]">
+    <link rel="stylesheet" on-load="loaded" type="text/css" href="[[cssPath]]">
     <style>
       :host {
         display: block;
@@ -13,6 +14,9 @@
   </template>
   <script src="../d3/d3.js"></script>
   <script src="../billboard.js/dist/billboard.js"></script>
+  <script>
+      billboard_charts_sync = true;
+  </script>
+  <script src="billboard-charts.js"></script>
   
-  <script async src="billboard-charts.js"></script>
 </dom-module>
