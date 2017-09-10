@@ -7,7 +7,7 @@
     "billboard.js": "^1.0.1",
     "poly-prep": "bahrus/poly-prep#^0.0.12",
     "d3": "^4.10.0",
-    "xtal-json-editor": "bahrus/xtal-json-editor#^0.0.5"
+    "xtal-json-editor": "bahrus/xtal-json-editor#^0.0.6"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
