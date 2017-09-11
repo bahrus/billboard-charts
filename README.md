@@ -20,11 +20,10 @@ If you are working with other Polymer elements, this will allow binding to take 
 
 To work with other Web Component libraries, you will need to either add some event listening logic, or utilize Polymer mixins, as demonstrated [here](https://www.webcomponents.org/element/bahrus/xtal-fetch).
 
-Features include "master-detail" functionality -- clicking on a data element can post the element to peer components.
 
 ## Important note regarding stylesheet dependency.
 
-This component leverages an [alternative method for importing an external css file](https://www.smashingmagazine.com/2016/12/styling-web-components-using-a-shared-style-sheet/#link-relstylesheet-in-the-shadow-dom), that doesn't rely on the deprecated HTML Imports.  The challenge with this approach is that, by default, the resolution of the url of the css file appears to be based on the hosting page, rather than the component.  If no css file is specified, this component attempts to calculate the default based the location of the component, using the document.currentScript object.  IE11 doesn't support that, so in that case, it uses a path relative to the root by default: /bower_components/billboard.js/dist/billboard.css.  
+This component leverages an [alternative method for importing an external css file](https://www.smashingmagazine.com/2016/12/styling-web-components-using-a-shared-style-sheet/#link-relstylesheet-in-the-shadow-dom), that doesn't rely on the deprecated(?) HTML Imports.  The challenge with this approach is that, by default, the resolution of the url of the css file appears to be based on the hosting page, rather than the component.  If no css file is specified, this component attempts to calculate the default based the location of the component, using the document.currentScript object.  IE11 doesn't support that, so in that case, it uses a path relative to the root by default: /bower_components/billboard.js/dist/billboard.css.  
 
 You can override the default, either to achieve your own look and feel, or to allow for less guesswork as far as the location of the file.  You can do so by using the setting shown below:
 
