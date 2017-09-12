@@ -92,12 +92,12 @@ declare var d3;
                 const refs = [] as IDynamicJSLoadStep[];
                 if(typeof(d3) !== 'object'){
                     if(!this.d3Path){
-                        // if(cs){
-                        //     this.d3Path = this.absolute(cs.baseURI, '../d3/d3.min.js');
-                        // }else{
-                        //     this.d3Path = this.baseUrlPath + 'd3/d3.min.js';
-                        // }
-                        this.d3Path = 'https://d3js.org/d3.v4.min.js';
+                        if(cs){
+                            this.d3Path = this.absolute(cs.baseURI, '../d3/d3.min.js');
+                        }else{
+                            this.d3Path = this.baseUrlPath + 'd3/d3.min.js';
+                        }
+                        //this.d3Path = 'https://d3js.org/d3.v4.min.js';
                     }
                     refs.push({src: this.d3Path});
                 }
