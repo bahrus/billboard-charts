@@ -52,7 +52,7 @@ Focusing first on the css reference, this component leverages an [alternative me
 But the challenge with this approach is that, by default, the resolution of the url of the css file appears to be based relative to the hosting page, rather than the component location. Therefore we need to "think on our feet" a little.  The approach we follow is:
 
 - If no css file is specified, this component attempts to calculate the default based the location of the component, using the document.currentScript object.  
-- Unfortunately, IE11 doesn't support document.currentScript, so for this browser, we must make due with educated guessing -- it defaults to the path relative to the website root: /bower_components/billboard.js/dist/billboard.css. 
+- Unfortunately, IE11 doesn't support document.currentScript, so for this browser, we must make do with educated guessing -- it defaults to the path relative to the website root: /bower_components/billboard.js/dist/billboard.css. 
 
 You can override this default calculated path, either to achieve your own look and feel by referencing your customized css file, or to allow for less guesswork as far as the location of the file, or both.  You can do so by using the setting shown below:
 
