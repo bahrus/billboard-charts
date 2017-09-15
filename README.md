@@ -16,6 +16,24 @@ To achieve master / detail functionality, where clicking on an element should no
 <billboard-charts publish data="[[example1]]" selected-element ="{{selectedDataPoint}}"></billboard-charts>
 ```
 
+To add/update data, use the add-data attribute / property.  Assuming the id of the billboard chart is "bc", then this adds data imperatively:
+
+```JavaScript
+    this.$.bc.newData = {
+        columns: [
+            ['Believer', 130, 150, 200, 300, 200, 100]
+        ]
+    };
+```
+
+likewise, this removes data:
+
+```JavaScript
+    this.$.bc.staleData = {
+        ids: 'Bodak Yellow (Money Moves)'
+    };
+```
+
 If you are working with other Polymer elements, this will allow binding to take place amongst the peers within the containing Polymer component.
 
 To work with other Web Component libraries, you will need to either add some event listening logic, or utilize Polymer mixins, as demonstrated [here](https://www.webcomponents.org/element/bahrus/xtal-fetch).
@@ -30,6 +48,8 @@ Given that this is a Polymer based component, and Polymer is heading into a bit 
 ```
 
 But if you don't want to be tied to using HTML Imports, you can instead provide your own reference to Polymer.Element independently, from wherever you choose, and just reference the javascript file directly:
+
+
 
 
 ```html
