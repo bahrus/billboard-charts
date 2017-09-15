@@ -16,7 +16,7 @@ declare var d3;
         src?: string;
     }
     let cs;
-    function initBillboardCharts(){
+    function initBillboardCharts(polymerMixin : any){
         if(customElements.get('billboard-charts')) return;
         /**
          * `billboard-charts`
@@ -26,7 +26,7 @@ declare var d3;
          * @polymer
          * @demo demo/index.html
          */        
-        class BillboardCharts extends Polymer.Element implements IBillboardChartsProperties{
+        class BillboardCharts extends polymerMixin(HTMLElement) implements IBillboardChartsProperties{
             publish: boolean; data: any; newData: object; selectedElement: object; cssPath; 
             d3Path;billboardLibPath;baseUrlPath;staleData: object;
             private _chart: any;
@@ -204,11 +204,11 @@ declare var d3;
     function WaitForPolymer()
     {
         cs = document.currentScript;
-        if ((typeof Polymer !== 'function') || (typeof Polymer.Element !== 'function')) {
+        if ((typeof Polymer !== 'function') || (typeof Polymer.ElementMixin !== 'function')) {
            setTimeout( WaitForPolymer, 100);
            return;
         }
-        initBillboardCharts();
+        initBillboardCharts(Polymer.ElementMixin);
     }
     WaitForPolymer();
 })();

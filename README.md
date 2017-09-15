@@ -26,7 +26,7 @@ To add/update data, use the add-data attribute / property.  Assuming the id of t
     };
 ```
 
-likewise, this removes data:
+Likewise, this removes data:
 
 ```JavaScript
     this.$.bc.staleData = {

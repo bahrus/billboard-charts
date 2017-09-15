@@ -1,6 +1,6 @@
 (function () {
     let cs;
-    function initBillboardCharts() {
+    function initBillboardCharts(polymerMixin) {
         if (customElements.get('billboard-charts'))
             return;
         /**
@@ -11,7 +11,7 @@
          * @polymer
          * @demo demo/index.html
          */
-        class BillboardCharts extends Polymer.Element {
+        class BillboardCharts extends polymerMixin(HTMLElement) {
             constructor() {
                 super(...arguments);
                 this._cssLoaded = false;
@@ -192,11 +192,11 @@
     }
     function WaitForPolymer() {
         cs = document.currentScript;
-        if ((typeof Polymer !== 'function') || (typeof Polymer.Element !== 'function')) {
+        if ((typeof Polymer !== 'function') || (typeof Polymer.ElementMixin !== 'function')) {
             setTimeout(WaitForPolymer, 100);
             return;
         }
-        initBillboardCharts();
+        initBillboardCharts(Polymer.ElementMixin);
     }
     WaitForPolymer();
 })();
