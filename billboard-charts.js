@@ -144,6 +144,10 @@
                         readOnly: true,
                         notify: true,
                     },
+                    staleData: {
+                        type: Object,
+                        observer: 'onStaleData'
+                    }
                 };
             }
             loaded() {
@@ -176,6 +180,11 @@
             onNewData() {
                 if (this.newData && this._chart) {
                     this._chart.load(this.newData);
+                }
+            }
+            onStaleData() {
+                if (this.staleData && this._chart) {
+                    this._chart.unload(this.staleData);
                 }
             }
         }

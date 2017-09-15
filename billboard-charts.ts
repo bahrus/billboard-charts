@@ -7,6 +7,7 @@ export interface IBillboardChartsProperties{
     data: any | polymer.PropObjectType,
     newData: object | polymer.PropObjectType,
     selectedElement: object | polymer.PropObjectType,
+    staleData: object | polymer.PropObjectType,
 }
 declare var bb;
 declare var d3;
@@ -27,7 +28,7 @@ declare var d3;
          */        
         class BillboardCharts extends Polymer.Element implements IBillboardChartsProperties{
             publish: boolean; data: any; newData: object; selectedElement: object; cssPath; 
-            d3Path;billboardLibPath;baseUrlPath;
+            d3Path;billboardLibPath;baseUrlPath;staleData: object;
             private _chart: any;
             private _cssLoaded = false;
             get chart(){
@@ -157,6 +158,10 @@ declare var d3;
                         readOnly: true,
                         notify: true,
                     },
+                    staleData:{
+                        type: Object,
+                        observer: 'onStaleData'
+                    }
                 }
             }
             loaded(){
@@ -185,6 +190,11 @@ declare var d3;
             onNewData(){
                 if(this.newData && this._chart){
                     this._chart.load(this.newData);
+                }
+            }
+            onStaleData(){
+                if(this.staleData && this._chart){
+                    this._chart.unload(this.staleData);
                 }
             }
         }
