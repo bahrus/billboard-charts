@@ -12,6 +12,7 @@
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+  <link rel="import" href="../../polymer/lib/elements/dom-if.html">
   <script async src="../billboard-charts.js"></script>
   <!-- <script type="module" src="../billboard-charts.js"></script> -->
   <link rel="import" href="../../xtal-json-editor/xtal-json-editor.html">
@@ -38,11 +39,14 @@
             <billboard-charts id="bc" publish data="[[example1]]" selected-element="{{selectedDataPoint}}" d3-path="https://d3js.org/d3.v4.min.js"
               billboard-lib-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js" css-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
             </billboard-charts>
+            <template is="dom-if" if="[[selectedDataPoint]]">
+              <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
+            </template>
             <billboard-charts id="bc2" publish data="[[example2]]" selected-element="{{selectedDataPoint}}" d3-path="https://d3js.org/d3.v4.min.js"
             billboard-lib-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js" css-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
           </billboard-charts>
             <br>
-            <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
+            
           </template>
 
         </dom-module>

@@ -166,7 +166,8 @@ declare var d3;
             }
             loaded(){
                 this._cssLoaded = true;
-                this.onPropsChange();
+                setTimeout(() => this.onPropsChange(), 100);
+                //this.onPropsChange();
             }
             onPropsChange(){
                 if(!this._cssLoaded) return;

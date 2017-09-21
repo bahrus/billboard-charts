@@ -16,7 +16,7 @@ To achieve master / detail functionality, where clicking on an element should no
 <billboard-charts publish data="[[example1]]" selected-element ="{{selectedDataPoint}}"></billboard-charts>
 ```
 
-To add/update data, use the add-data attribute / property.  Assuming the id of the billboard chart is "bc", then this adds data imperatively:
+To add/update data, use the new-data attribute / property.  Assuming the id of the billboard chart is "bc", then this adds data imperatively:
 
 ```JavaScript
     this.$.bc.newData = {
@@ -77,7 +77,7 @@ But the challenge with this approach is that, by default, the resolution of the 
 You can override this default calculated path, either to achieve your own look and feel by referencing your customized css file, or to allow for less guesswork as far as the location of the file, or both.  You can do so by using the setting shown below:
 
 ```html
-    <billboard-charts cssPath="...">
+    <billboard-charts css-path="...">
 ``` 
 
 A similar approach is taken for resolving the other two dependencies:  billboard.js and d3.js.  The code first checks to make sure that d3 and billboard.js aren't already loaded.  In the case of d3, this is a scenario likely to be encountered.  For each library that is found not to already be loaded,  _billboard-charts_ uses document.currentScript, combined with the values of properties d3Path and billboardLibPath to calculate the expected location of these resources.
