@@ -13,13 +13,13 @@
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
   <link rel="import" href="../../polymer/lib/elements/dom-if.html">
+  <script async src="../../json-merge/json-merge.js"></script>
   <script async src="../billboard-charts.js"></script>
   <!-- <script type="module" src="../billboard-charts.js"></script> -->
   <link rel="import" href="../../xtal-json-editor/xtal-json-editor.html">
 
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
-
     </style>
   </custom-style>
 </head>
@@ -28,7 +28,8 @@
   <div class="vertical-section-container centered">
     <h3>Basic billboard-charts demo</h3>
     <p>NB: In order to showcase the script used to populate the data, this demo doesn't work with IE11. To see it working with
-      IE11, click <a href="indexIE11.html">here</a>
+      IE11, click
+      <a href="indexIE11.html">here</a>
     </p>
 
     <demo-snippet>
@@ -42,11 +43,46 @@
             <template is="dom-if" if="[[selectedDataPoint]]">
               <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
             </template>
+            <json-merge watch="[]" result="{{example2}}">
+              <script type="application/json">
+                [
+                  {
+                    "data": {
+                      "columns": [
+                        ["data", 91.4]
+                      ],
+                      "type": "gauge"
+                    },
+                    "gauge": {},
+                    "color": {
+                      "pattern": [
+                        "#FF0000",
+                        "#F97600",
+                        "#F6C600",
+                        "#60B044"
+                      ],
+                      "threshold": {
+                        "values": [
+                          30,
+                          60,
+                          90,
+                          100
+                        ]
+                      }
+                    },
+                    "size": {
+                      "height": 180
+                    },
+                    "bindto": "#GaugeChart"
+                  }
+                ]
+              </script>
+            </json-merge>
             <billboard-charts id="bc2" publish data="[[example2]]" selected-element="{{selectedDataPoint}}" d3-path="https://d3js.org/d3.v4.min.js"
-            billboard-lib-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js" css-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
-          </billboard-charts>
+              billboard-lib-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js" css-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
+            </billboard-charts>
             <br>
-            
+
           </template>
 
         </dom-module>
@@ -103,38 +139,7 @@
                   };
                 }, 2000);
                 //combination
-                this.example2 = {
-                  "data": {
-                    "columns": [
-                      ["data", 91.4]
-                    ],
-                    "type": "gauge",
-                    //"onclick": function (d, i) { console.log("onclick", d, i); },
-                    "onover": function (d, i) { console.log("onover", d, i); },
-                    "onout": function (d, i) { console.log("onout", d, i); }
-                  },
-                  "gauge": {},
-                  "color": {
-                    "pattern": [
-                      "#FF0000",
-                      "#F97600",
-                      "#F6C600",
-                      "#60B044"
-                    ],
-                    "threshold": {
-                      "values": [
-                        30,
-                        60,
-                        90,
-                        100
-                      ]
-                    }
-                  },
-                  "size": {
-                    "height": 180
-                  },
-                  "bindto": "#GaugeChart"
-                };
+                
               }
             }
             customElements.define(MyComponent.is, MyComponent);
