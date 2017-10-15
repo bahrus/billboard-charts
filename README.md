@@ -2,6 +2,98 @@
 
 # \<billboard-charts\>
 
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="https://rawgit.com/bahrus/xtal/master/bower_components/polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="billboard-charts.html">
+    <link rel="import" href="https://rawgit.com/bahrus/json-merge/master/json-merge.html">
+    <dom-bind>
+        <template>
+            Click on a data point to see the data element below.
+            <json-merge watch="[]" result="{{example1}}">
+              <script type="application/json">
+                [
+                  {
+                    "data": {
+                      "columns": [
+                        [
+                          "Bodak Yellow (Money Moves)",
+                          30,
+                          200,
+                          100,
+                          400,
+                          150,
+                          250
+                        ],
+                        [
+                          "Wild Thoughts",
+                          50,
+                          20,
+                          10,
+                          40,
+                          15,
+                          25
+                        ]
+                      ]
+                    }
+                  }
+                ]
+              </script>              
+            </json-merge>
+            <billboard-charts id="bc" publish data="[[example1]]" selected-element="{{selectedDataPoint}}" d3-path="https://d3js.org/d3.v4.min.js"
+              billboard-lib-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js" css-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
+            </billboard-charts>
+            <template is="dom-if" if="[[selectedDataPoint]]">
+              <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
+            </template>
+            <json-merge watch="[]" result="{{example2}}">
+              <script type="application/json">
+                [
+                  {
+                    "data": {
+                      "columns": [
+                        ["data", 91.4]
+                      ],
+                      "type": "gauge"
+                    },
+                    "gauge": {},
+                    "color": {
+                      "pattern": [
+                        "#FF0000",
+                        "#F97600",
+                        "#F6C600",
+                        "#60B044"
+                      ],
+                      "threshold": {
+                        "values": [
+                          30,
+                          60,
+                          90,
+                          100
+                        ]
+                      }
+                    },
+                    "size": {
+                      "height": 180
+                    },
+                    "bindto": "#GaugeChart"
+                  }
+                ]
+              </script>
+            </json-merge>
+            <billboard-charts id="bc2" publish data="[[example2]]" selected-element="{{selectedDataPoint}}" d3-path="https://d3js.org/d3.v4.min.js"
+              billboard-lib-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js" css-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
+            </billboard-charts>
+            <br>
+        </template>
+    </dom-bind>
+  </template>
+</custom-element-demo>
+```
+-->
+
 \<billboard-charts\> is a web component wrapper around the [billboard.js](https://naver.github.io/billboard.js/) hit library.
 
 Data can be passed into the component via the data property, either via binding, or programatically.  The boolean "publish" will block rendering if it isn't present.  This allows one to apply sanity checks on displaying new data.
