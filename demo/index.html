@@ -37,6 +37,36 @@
         <dom-module id="my-component">
           <template>
             Click on a data point to see the data element below.
+            <json-merge watch="[]" result="{{example1}}">
+              <script type="application/json">
+                [
+                  {
+                    "data": {
+                      "columns": [
+                        [
+                          "Bodak Yellow (Money Moves)",
+                          30,
+                          200,
+                          100,
+                          400,
+                          150,
+                          250
+                        ],
+                        [
+                          "Wild Thoughts",
+                          50,
+                          20,
+                          10,
+                          40,
+                          15,
+                          25
+                        ]
+                      ]
+                    }
+                  }
+                ]
+              </script>              
+            </json-merge>
             <billboard-charts id="bc" publish data="[[example1]]" selected-element="{{selectedDataPoint}}" d3-path="https://d3js.org/d3.v4.min.js"
               billboard-lib-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js" css-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
             </billboard-charts>
@@ -93,30 +123,6 @@
               connectedCallback() {
                 super.connectedCallback();
                 //Line Chart
-                this.example1 = {
-                  "data": {
-                    "columns": [
-                      [
-                        "Bodak Yellow (Money Moves)",
-                        30,
-                        200,
-                        100,
-                        400,
-                        150,
-                        250
-                      ],
-                      [
-                        "Wild Thoughts",
-                        50,
-                        20,
-                        10,
-                        40,
-                        15,
-                        25
-                      ]
-                    ],
-                  },
-                }
                 setTimeout(() => {
                   this.$.bc.newData = {
                     columns: [
