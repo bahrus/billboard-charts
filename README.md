@@ -7,6 +7,7 @@
 <custom-element-demo>
   <template>
     <link rel="import" href="https://rawgit.com/bahrus/xtal/master/bower_components/polymer/lib/elements/dom-bind.html">
+        <link rel="import" href="https://rawgit.com/bahrus/xtal/master/bower_components/polymer/lib/elements/dom-if.html">
     <link rel="import" href="billboard-charts.html">
     <link rel="import" href="https://rawgit.com/bahrus/json-merge/master/json-merge.html">
     <link rel="import" href="https://rawgit.com/bahrus/xtal-json-editor/master/xtal-json-editor.html">
