@@ -43,7 +43,39 @@
                 ]
               </script>              
             </json-merge>
-            <billboard-charts id="bc" publish data="[[example1]]" selected-element="{{selectedDataPoint}}" d3-path="https://d3js.org/d3.v4.min.js"
+            <json-merge watch="{}" result="{{newData}}" delay="1000">
+              <script type="application/json">
+                [
+                  {
+                    "columns": [
+                      ["Despacito", 230, 190, 300, 500, 300, 400]
+                    ]
+                  }
+                ]
+              </script>
+            </json-merge>
+            <json-merge watch="{}" result="{{newData}}" delay="2500">
+              <script type="application/json">
+                [
+                  {
+                    "columns": [
+                      ["Believer", 130, 150, 200, 300, 200, 100]
+                    ]
+                  }
+                ]
+              </script>
+            </json-merge>
+            <json-merge watch="{}" result="{{staleData}}" delay="5500">
+              <script type="application/json">
+                [
+                  {
+                    "ids": "Bodak Yellow (Money Moves)"
+                  }
+                ]
+              </script>
+            </json-merge>
+
+            <billboard-charts id="bc" publish data="[[example1]]" new-data="[[newData]]" stale-data="[[staleData]]" selected-element="{{selectedDataPoint}}" d3-path="https://d3js.org/d3.v4.min.js"
               billboard-lib-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js" css-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
             </billboard-charts>
             <template is="dom-if" if="[[selectedDataPoint]]">
