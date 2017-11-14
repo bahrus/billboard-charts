@@ -14,7 +14,7 @@
     <dom-bind>
         <template>
             Click on a data point to see the data element below.
-            <json-merge watch="[]" result="{{example1}}">
+            <json-merge watch="[]" result="{{example1}}" delay="1000">
               <script type="application/json">
                 [
                   {
@@ -44,7 +44,7 @@
                 ]
               </script>              
             </json-merge>
-            <json-merge watch="{}" result="{{newData}}" delay="1000">
+            <json-merge watch="{}" result="{{newData}}" delay="2000">
               <script type="application/json">
                 [
                   {
@@ -55,7 +55,7 @@
                 ]
               </script>
             </json-merge>
-            <json-merge watch="{}" result="{{newData}}" delay="2500">
+            <json-merge watch="{}" result="{{newData}}" delay="3500">
               <script type="application/json">
                 [
                   {
@@ -66,7 +66,7 @@
                 ]
               </script>
             </json-merge>
-            <json-merge watch="{}" result="{{staleData}}" delay="5500">
+            <json-merge watch="{}" result="{{staleData}}" delay="6s500">
               <script type="application/json">
                 [
                   {
