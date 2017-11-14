@@ -66,7 +66,7 @@
                 ]
               </script>
             </json-merge>
-            <json-merge watch="{}" result="{{staleData}}" delay="6s500">
+            <json-merge watch="{}" result="{{staleData}}" delay="6500">
               <script type="application/json">
                 [
                   {
