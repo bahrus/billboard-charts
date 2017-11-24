@@ -9,7 +9,7 @@
     <link rel="import" href="https://rawgit.com/bahrus/xtal/master/bower_components/polymer/lib/elements/dom-bind.html">
         <link rel="import" href="https://rawgit.com/bahrus/xtal/master/bower_components/polymer/lib/elements/dom-if.html">
     <link rel="import" href="billboard-charts.html">
-    <link rel="import" href="https://rawgit.com/bahrus/json-merge/master/json-merge.html">
+    <script async src="https://unpkg.com/xtal-json-merge@0.1.0/json-merge.js"></script>
     <link rel="import" href="https://rawgit.com/bahrus/xtal-json-editor/master/xtal-json-editor.html">
     <dom-bind>
         <template>
