@@ -99,9 +99,7 @@
                 ]
               </script>
             </json-merge>
-            <billboard-charts id="bc" publish data="[[example1]]" new-data="[[newData]]" stale-data="[[staleData]]" selected-element="{{selectedDataPoint}}" d3-path="https://d3js.org/d3.v4.min.js"
-              billboard-lib-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js" css-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
-            </billboard-charts>
+            <billboard-charts id="bc" publish data="[[example1]]" new-data="[[newData]]" stale-data="[[staleData]]" selected-element="{{selectedDataPoint}}"></billboard-charts>
             <template is="dom-if" if="[[selectedDataPoint]]">
               <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
             </template>
@@ -140,9 +138,7 @@
                 ]
               </script>
             </json-merge>
-            <billboard-charts id="bc2" publish data="[[example2]]" selected-element="{{selectedDataPoint}}" d3-path="https://d3js.org/d3.v4.min.js"
-              billboard-lib-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js" css-path="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
-            </billboard-charts>
+            <billboard-charts id="bc2" publish data="[[example2]]" selected-element="{{selectedDataPoint}}"></billboard-charts>
             <br>
 
           </template>

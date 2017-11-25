@@ -82,21 +82,21 @@ declare var d3;
             
             connectedCallback(){
                 super.connectedCallback();
-                if(!this.baseUrlPath) this.baseUrlPath = '/bower_components/';
+                if(!this.baseUrlPath) this.baseUrlPath = '';
                 if(!this.cssPath){
                     if(cs){
-                        this.cssPath = this.absolute(cs.src, '../billboard.js/dist/billboard.min.css');
+                        this.cssPath = this.absolute(cs.src, 'billboard.min.css');
                     }else{
-                        this.cssPath = this.baseUrlPath + 'billboard.js/dist/billboard.min.css';
+                        this.cssPath = this.baseUrlPath + 'billboard.min.css';
                     }
                 }
                 const refs = [] as IDynamicJSLoadStep[];
                 if(typeof(d3) !== 'object'){
                     if(!this.d3Path){
                         if(cs){
-                            this.d3Path = this.absolute(cs.src, '../d3/d3.min.js');
+                            this.d3Path = this.absolute(cs.src, 'd3.js');
                         }else{
-                            this.d3Path = this.baseUrlPath + 'd3/d3.min.js';
+                            this.d3Path = this.baseUrlPath + 'd3.js';
                         }
                         //this.d3Path = 'https://d3js.org/d3.v4.min.js';
                     }
@@ -105,9 +105,9 @@ declare var d3;
                 if(typeof(bb) === 'undefined'){
                     if(!this.billboardLibPath){
                         if(cs){
-                            this.billboardLibPath = this.absolute(cs.src, '../billboard.js/dist/billboard.min.js');
+                            this.billboardLibPath = this.absolute(cs.src, 'billboard.js');
                         }else{
-                            this.billboardLibPath = this.baseUrlPath + 'billboard.js/dist/billboard.min.js'
+                            this.billboardLibPath = this.baseUrlPath + 'billboard.js'
                         }
                     }
                     refs.push({src: this.billboardLibPath});
@@ -201,10 +201,10 @@ declare var d3;
         }
         customElements.define(BillboardCharts.is, BillboardCharts);
     }
-
+    cs =  document.currentScript;       
     function WaitForPolymer()
     {
-        cs = document.currentScript;
+        
         if ((typeof Polymer !== 'function') || (typeof Polymer.ElementMixin !== 'function')) {
            setTimeout( WaitForPolymer, 100);
            return;
