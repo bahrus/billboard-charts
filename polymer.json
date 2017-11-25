@@ -2,9 +2,9 @@
   
   "sources":[
     "billboard-charts.js", 
-    "jsoneditor-minimalist.js", 
-    "jsoneditor.min.css",
-    "img/jsoneditor-icons.svg"
+    "billboard.js", 
+    "billboard.min.css",
+    "d3.js"
   ],
   "lint": {
     "rules": [
