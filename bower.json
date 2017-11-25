@@ -6,9 +6,7 @@
     "polymer": "Polymer/polymer#^2.0.0",
     "billboard.js": "^1.1.1",
     "poly-prep": "bahrus/poly-prep#^0.0.12",
-    "d3": "^4.10.2",
-    "xtal-json-editor": "bahrus/xtal-json-editor#^0.0.6",
-    "json-merge": "bahrus/json-merge#^0.0.9"
+    "d3": "^4.10.2"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",

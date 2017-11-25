@@ -16,7 +16,6 @@
     "@bower_components/iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
     "@bower_components/iron-flex-layout": "polymerelements/iron-flex-layout#1 - 2",
     "@bower_components/iron-location": "PolymerElements/iron-location#1 - 2",
-    "@bower_components/json-merge": "bahrus/json-merge#^0.0.9",
     "@bower_components/lodash": "lodash/lodash#^3.7.0",
     "@bower_components/marked": "chjj/marked#~0.3.6",
     "@bower_components/marked-element": "polymerelements/marked-element#1 - 2",
