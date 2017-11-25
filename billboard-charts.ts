@@ -85,7 +85,7 @@ declare var d3;
                 if(!this.baseUrlPath) this.baseUrlPath = '/bower_components/';
                 if(!this.cssPath){
                     if(cs){
-                        this.cssPath = this.absolute(cs.baseURI, '../billboard.js/dist/billboard.min.css');
+                        this.cssPath = this.absolute(cs.src, '../billboard.js/dist/billboard.min.css');
                     }else{
                         this.cssPath = this.baseUrlPath + 'billboard.js/dist/billboard.min.css';
                     }
@@ -94,7 +94,7 @@ declare var d3;
                 if(typeof(d3) !== 'object'){
                     if(!this.d3Path){
                         if(cs){
-                            this.d3Path = this.absolute(cs.baseURI, '../d3/d3.min.js');
+                            this.d3Path = this.absolute(cs.src, '../d3/d3.min.js');
                         }else{
                             this.d3Path = this.baseUrlPath + 'd3/d3.min.js';
                         }
@@ -105,7 +105,7 @@ declare var d3;
                 if(typeof(bb) === 'undefined'){
                     if(!this.billboardLibPath){
                         if(cs){
-                            this.billboardLibPath = this.absolute(cs.baseURI, '../billboard.js/dist/billboard.min.js');
+                            this.billboardLibPath = this.absolute(cs.src, '../billboard.js/dist/billboard.min.js');
                         }else{
                             this.billboardLibPath = this.baseUrlPath + 'billboard.js/dist/billboard.min.js'
                         }

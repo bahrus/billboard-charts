@@ -9,8 +9,8 @@
     <link rel="import" href="https://rawgit.com/bahrus/xtal/master/bower_components/polymer/lib/elements/dom-bind.html">
         <link rel="import" href="https://rawgit.com/bahrus/xtal/master/bower_components/polymer/lib/elements/dom-if.html">
     <link rel="import" href="billboard-charts.html">
-    <script async src="https://unpkg.com/xtal-json-merge@0.1.0/json-merge.js"></script>
-    <link rel="import" href="https://rawgit.com/bahrus/xtal-json-editor/master/xtal-json-editor.html">
+    <script async src="https://cdn.jsdelivr.net/npm/xtal-json-merge@0.1.1/build/ES6/json-merge.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/xtal-json-editor@0.0.12/build/ES6/xtal-json-editor.js"></script>
     <dom-bind>
         <template>
             Click on a data point to see the data element below.
@@ -167,15 +167,13 @@ To work with other Web Component libraries, you will need to either add some eve
 
 ## Important note regarding referencing the web component and managing dependencies.
 
-Given that this is a Polymer based component, and Polymer is heading into a bit of turbulence as it switches to npm / ES6 modules, a few accomodations have been made.  You can reference the component the Polymer < 3 way:
+You can reference the component the Polymer <3 way:
 
 ```html
 <link rel="import" href="../billboard-charts.html">
 ```
 
 But if you don't want to be tied to using HTML Imports, you can instead provide your own reference to Polymer.Element independently, from wherever you choose, and just reference the javascript file directly:
-
-
 
 
 ```html
@@ -195,12 +193,8 @@ Additionally, _billboard-chart_ depends on three external references:  d3, billb
 
 Focusing first on the css reference, this component leverages an [alternative method for importing an external css file](https://www.smashingmagazine.com/2016/12/styling-web-components-using-a-shared-style-sheet/#link-relstylesheet-in-the-shadow-dom), that doesn't rely on the deprecated(?) HTML Imports.  This alternative seems to  be poised for long-lasting browser support.
 
-But the challenge with this approach is that, by default, the resolution of the url of the css file appears to be based relative to the hosting page, rather than the component location. Therefore we need to "think on our feet" a little.  The approach we follow is:
 
-- If no css file is specified, this component attempts to calculate the default based the location of the component, using the document.currentScript object.  
-- Unfortunately, IE11 doesn't support document.currentScript, so for this browser, we must make do with educated guessing -- it defaults to the path relative to the website root: /bower_components/billboard.js/dist/billboard.css. 
-
-You can override this default calculated path, either to achieve your own look and feel by referencing your customized css file, or to allow for less guesswork as far as the location of the file, or both.  You can do so by using the setting shown below:
+You can override this default path for the css file that "ships" with the web component, to achieve your own look and feel by referencing your customized css file.  You can do so by using the setting shown below:
 
 ```html
     <billboard-charts css-path="...">
@@ -208,9 +202,8 @@ You can override this default calculated path, either to achieve your own look a
 
 A similar approach is taken for resolving the other two dependencies:  billboard.js and d3.js.  The code first checks to make sure that d3 and billboard.js aren't already loaded.  In the case of d3, this is a scenario likely to be encountered.  For each library that is found not to already be loaded,  _billboard-charts_ uses document.currentScript, combined with the values of properties d3Path and billboardLibPath to calculate the expected location of these resources.
 
-In addition to being able to specify the location of each of these three resources individually via properties _d3Path_, _billboardLibPath_ and _cssPath_, you can, primarily for purposes of IE11, specify the root url for the folder containing all three of these resources, using property _baseUrlPath_.  By default, _baseUrlPath_ = '/bower_components/'. 
 
-In the demo of this component, we chose to specify the path for all three files explictly.  This was necessitated by the fact that the webcomponents.org site seems to produce unexpected results when loading resources dynamically.  The explicit references in the demo are as follows:
+In the demo of this component, we chose to specify the path for all three files explictly.  The explicit references in the demo are as follows:
 
 ```html
 <billboard-charts id="bc" publish data="[[example1]]" selected-element ="{{selectedDataPoint}}"
