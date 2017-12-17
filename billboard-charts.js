@@ -77,6 +77,20 @@
             this._staleData = val;
             this.onPropsChange();
         }
+        set selectedElement(val) {
+            this._selectedElement = val;
+            const newEvent = new CustomEvent('selected-element-changed', {
+                detail: {
+                    value: val
+                },
+                bubbles: true,
+                composed: true
+            });
+            this.dispatchEvent(newEvent);
+        }
+        get selectedElement() {
+            return this._selectedElement;
+        }
         static get observedAttributes() {
             return ['publish', 'css-path', 'd3-path', 'billboard-lib-path', 'data', 'newData', 'staleData'];
         }
@@ -178,7 +192,6 @@
             link.setAttribute('type', "text/css");
             link.setAttribute('href', this._cssPath);
             link.addEventListener('load', e => {
-                debugger;
                 this._cssLoaded = true;
                 this.onPropsChange();
             });
@@ -200,7 +213,8 @@
             if (!this.data.data.onclick) {
                 //debugger;
                 this.data.data.onclick = (dataPoint, element) => {
-                    this['_setSelectedElement'](dataPoint);
+                    //this['_setSelectedElement'](dataPoint);
+                    this.selectedElement = dataPoint;
                 };
             }
             if (!this._chart) {

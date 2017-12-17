@@ -101,7 +101,22 @@ declare var d3;
             this.onPropsChange();
         }
         
-        selectedElement: object; 
+        _selectedElement;
+        set selectedElement(val){
+            this._selectedElement = val;
+            const newEvent = new CustomEvent('selected-element-changed', {
+                detail: {
+                    value:val
+                },
+                bubbles: true,
+                composed: true
+            } as CustomEventInit);
+            this.dispatchEvent(newEvent);
+        }
+
+        get selectedElement(){
+            return this._selectedElement
+        }
         
         private _chart: any;
         private _cssLoaded = false;
@@ -109,7 +124,6 @@ declare var d3;
         static get observedAttributes() {
             return ['publish', 'css-path', 'd3-path', 'billboard-lib-path', 'data', 'newData', 'staleData'];
         }
-
 
         static get is() { return 'billboard-charts'; }
 
@@ -221,7 +235,6 @@ declare var d3;
             link.setAttribute('type', "text/css");
             link.setAttribute('href', this._cssPath);
             link.addEventListener('load', e => {
-                debugger;
                 this._cssLoaded = true;
                 this.onPropsChange();
             });
@@ -241,7 +254,9 @@ declare var d3;
             if (!this.data.data.onclick) {
                 //debugger;
                 this.data.data.onclick = (dataPoint, element) => {
-                    this['_setSelectedElement'](dataPoint);
+                    //this['_setSelectedElement'](dataPoint);
+                    this.selectedElement = dataPoint;
+                    
                 }
             }
             if (!this._chart) {
