@@ -128,7 +128,7 @@
 ```
 -->
 
-\<billboard-charts\> is a web component wrapper around the [billboard.js](https://naver.github.io/billboard.js/) hit library.
+\<billboard-charts\> is a dependency-free web component wrapper around the [billboard.js](https://naver.github.io/billboard.js/) hit library. 
 
 Data can be passed into the component via the data property, either via binding, or programatically.  The boolean "publish" will block rendering if it isn't present.  This allows one to apply sanity checks on displaying new data.
 
@@ -160,9 +160,9 @@ Likewise, this removes data:
     };
 ```
 
-If you are working with other Polymer elements, this will allow binding to take place amongst the peers within the containing Polymer component.
+If you are working with other Polymer web component container, this will allow binding to take place amongst the peers within the containing Polymer component.
 
-To work with other Web Component libraries, you will need to either add some event listening logic, or utilize Polymer mixins, as demonstrated [here](https://www.webcomponents.org/element/bahrus/xtal-fetch).
+To work with other Web Component libraries, you will need to either add some event listening logic (for "selected-element-changed"), or utilize Polymer mixins, as demonstrated [here](https://www.webcomponents.org/element/bahrus/xtal-fetch).
 
 
 ## Important note regarding referencing the web component and managing dependencies.
@@ -186,12 +186,8 @@ Or you can use ES6 modules:
 <script type="module" src="../billboard-charts.js"></script>
 ```
 
-Regardless of how it is referenced, _billboard-chart's_ JavaScript will wait until Polymer.Element is loaded before trying to extend it.
 
 Additionally, _billboard-chart_ depends on three external references:  d3, billboard.js, and a css file that comes with billboard.js, but which we would like the ability to customize.
-
-
-Focusing first on the css reference, this component leverages an [alternative method for importing an external css file](https://www.smashingmagazine.com/2016/12/styling-web-components-using-a-shared-style-sheet/#link-relstylesheet-in-the-shadow-dom), that doesn't rely on the deprecated(?) HTML Imports.  This alternative seems to  be poised for long-lasting browser support.
 
 
 You can override this default path for the css file that "ships" with the web component, to achieve your own look and feel by referencing your customized css file.  You can do so by using the setting shown below:
@@ -200,10 +196,10 @@ You can override this default path for the css file that "ships" with the web co
     <billboard-charts css-path="...">
 ``` 
 
-A similar approach is taken for resolving the other two dependencies:  billboard.js and d3.js.  The code first checks to make sure that d3 and billboard.js aren't already loaded.  In the case of d3, this is a scenario likely to be encountered.  For each library that is found not to already be loaded,  _billboard-charts_ uses document.currentScript, combined with the values of properties d3Path and billboardLibPath to calculate the expected location of these resources.
+A similar approach is taken for resolving the other two dependencies:  billboard.js and d3.js.  The code first checks to make sure that d3 and billboard.js aren't already loaded.  In the case of d3, this is a scenario likely to be encountered.  For each library that is found not to already be loaded,  _billboard-charts_ loads them from the same directory as the component itself.  But, mostly for the benefit of d3 possibly being referenced from a different location for other libraries, you can set both of these paths to whever you'd like.
 
 
-In the demo of this component, we chose to specify the path for all three files explictly.  The explicit references in the demo are as follows:
+In the demo of this component, we chose to specify the path for all three files explictly for demonstrating purposes.  The explicit references in the demo are as follows:
 
 ```html
 <billboard-charts id="bc" publish data="[[example1]]" selected-element ="{{selectedDataPoint}}"
