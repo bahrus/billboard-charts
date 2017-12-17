@@ -1,6 +1,7 @@
 {
   "name": "billboard-charts",
-  "version": "0.1.8",
+  "flat": true,
+  "version": "0.1.9",
   "description": "Web component interface to billboard.js - the hit charting library",
   "main": "billboard-charts.js",
   "repository": "https://github.com/bahrus/billboard-charts",
@@ -9,7 +10,7 @@
   "dependencies": {
     "@bower_components/accessibility-developer-tools": "GoogleChrome/accessibility-developer-tools#^2.10.0",
     "@bower_components/async": "caolan/async#^1.5.0",
-    "@bower_components/billboard.js": "naver/billboard.js#^1.1.1",
+    "@bower_components/billboard.js": "naver/billboard.js#^1.2.0",
     "@bower_components/chai": "chaijs/chai#^3.2.0",
     "@bower_components/d3": "mbostock-bower/d3-bower#^4.10.2",
     "@bower_components/font-roboto": "PolymerElements/font-roboto#^1",
