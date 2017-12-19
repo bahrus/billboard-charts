@@ -29,7 +29,7 @@ declare var d3;
     if (customElements.get('billboard-charts')) return;
     /**
      * `billboard-charts`
-     * Polymer wrapper around billboard.js charting library
+     *  Web component wrapper around billboard.js charting library
      *
      * @customElement
      * @polymer
@@ -89,7 +89,8 @@ declare var d3;
         }
         set newData(val){
             this._newData = val;
-            this.onPropsChange();
+            //this.onPropsChange();
+            this.onNewData();
         }
 
         _staleData: object;
@@ -98,7 +99,8 @@ declare var d3;
         }
         set staleData(val){
             this._staleData = val;
-            this.onPropsChange();
+            //this.onPropsChange();
+            this.onStaleData();
         }
         
         _selectedElement;

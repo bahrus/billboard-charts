@@ -14,7 +14,7 @@
         return;
     /**
      * `billboard-charts`
-     * Polymer wrapper around billboard.js charting library
+     *  Web component wrapper around billboard.js charting library
      *
      * @customElement
      * @polymer
@@ -68,14 +68,16 @@
         }
         set newData(val) {
             this._newData = val;
-            this.onPropsChange();
+            //this.onPropsChange();
+            this.onNewData();
         }
         get staleData() {
             return this._staleData;
         }
         set staleData(val) {
             this._staleData = val;
-            this.onPropsChange();
+            //this.onPropsChange();
+            this.onStaleData();
         }
         set selectedElement(val) {
             this._selectedElement = val;
