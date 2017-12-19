@@ -5,7 +5,6 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "billboard.js": "^1.2.0",
-    "poly-prep": "bahrus/poly-prep#^0.0.12",
     "d3": "^4.10.2"
   },
   "devDependencies": {
