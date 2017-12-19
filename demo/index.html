@@ -10,10 +10,22 @@
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <script async src="https://cdn.jsdelivr.net/npm/xtal-sip/xtal-sip-loader.js"></script>
+  <script>
+    customElements.whenDefined('xtal-sip').then(() =>{
+      const xtalSip = customElements.get('xtal-sip');
+      xtalSip.tieBreaker = () =>{
+        debugger;
+      }
+    });
+  </script>
+  <link rel-ish="preload" as="document" data-tags="dom-bind,dom-if" href="../../polymer/lib/elements/dom-{1}.html">
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
-  <link rel="import" href="../../polymer/lib/elements/dom-if.html">
-  <script async src="https://cdn.jsdelivr.net/npm/xtal-json-merge@0.1.1/build/ES6/json-merge.js"></script>
+  <!-- <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+  <link rel="import" href="../../polymer/lib/elements/dom-if.html"> -->
+  <link rel-ish="preload" async as="script" data-es6 
+    href="https://cdn.jsdelivr.net/npm/xtal-json-merge/build/ES6/json-merge.js" data-tags="json-merge">
+  <!-- <script async src="https://cdn.jsdelivr.net/npm/xtal-json-merge@0.1.1/build/ES6/json-merge.js"></script> -->
   <script async src="../billboard-charts.js"></script>
   <!-- <script type="module" src="../billboard-charts.js"></script> -->
   <script async src="https://cdn.jsdelivr.net/npm/xtal-json-editor@0.0.12/build/ES6/xtal-json-editor.js"></script>
@@ -38,6 +50,7 @@
         <dom-bind>
           <template>
             Click on a data point to see the data element below.
+            <xtal-sip></xtal-sip>
             <json-merge watch="{}" result="{{example1}}" delay="1000">
               <script type="application/json">
                 [
