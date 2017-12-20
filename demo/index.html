@@ -10,12 +10,25 @@
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <script async src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.21/xtal-sip-loader.js"></script>
+  
   <script>
-    customElements.whenDefined('xtal-sip').then(() =>{
-      const xtalSip = customElements.get('xtal-sip');
-      xtalSip.tieBreaker = () =>{
-        debugger;
+    document.head.addEventListener('xtal-sip-init', e =>{
+      e.detail.tieBreaker = (tagName, candidates) =>{
+        const isIE = navigator.userAgent.indexOf('Trident') > -1;
+        for(let i = 0, ii = candidates.length; i < ii; i++){
+          const el = candidates[i];
+          //const el = candidate.element;
+          let isGood = false;
+          if(isIE){
+            if(el.dataset.es === '5') isGood = true;
+          } else{
+            if(el.dataset.es === '6') isGood = true;
+          }
+          if(isGood) {
+            return el;
+          }
+        }
+        
       }
     });
   </script>
@@ -24,9 +37,11 @@
   <link id="hasBaseCdnUrl" rel-ish="preload" async as="script" data-es6 data-base="https://cdn.jsdelivr.net/npm/"
     href="xtal-json-merge/build/ES6/json-merge.js" data-tags="json-merge">
   
-  <link rel-ish="preload" async as="script" data-es6 data-base-ref="hasBaseCdnUrl"
+  <link rel-ish="preload" async as="script" data-es="6" data-base-ref="hasBaseCdnUrl"
     href="xtal-json-editor/build/ES6/xtal-json-editor.js" data-tags="xtal-json-editor">
-    <script async src="../billboard-charts.js"></script>
+  <link rel-ish="preload" async as="script" data-es="5" data-base-ref="hasBaseCdnUrl"
+    href="xtal-json-editor/build/ES6/xtal-json-editor.js" data-tags="xtal-json-editor">
+  <script async src="../billboard-charts.js"></script>
   
  
 
@@ -37,6 +52,7 @@
 </head>
 
 <body>
+    <script async src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.27/xtal-sip-loader.js"></script>
   <div class="vertical-section-container centered">
     <h3>Basic billboard-charts demo</h3>
     <xtal-sip></xtal-sip>
@@ -110,6 +126,7 @@
             </json-merge>
             <billboard-charts id="bc" publish data="[[example1]]" new-data="[[newData]]" stale-data="[[staleData]]" selected-element="{{selectedDataPoint}}"></billboard-charts>
             <template is="dom-if" if="[[selectedDataPoint]]">
+                <xtal-sip></xtal-sip>
               <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
             </template>
             <json-merge watch="[]" result="{{example2}}">
