@@ -12,13 +12,10 @@
   <script src="https://cdn.polyfill.io/v2/polyfill.js?features=default,fetch"></script>
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <!-- <script src="../../json-merge/json-merge.js"></script> -->
   <script>
     document.head.addEventListener('xtal-sip-init', e =>{
       e.detail.tieBreaker = (tagName, candidates) =>{
-        console.log('tagname = ' + tagName)
         const isIE = navigator.userAgent.indexOf('Trident') > -1;
-        console.log('isIE')
         for(let i = 0, ii = candidates.length; i < ii; i++){
           const el = candidates[i];
           //const el = candidate.element;
@@ -28,10 +25,7 @@
           } else{
             if(el.dataset.es === '6') isGood = true;
           }
-          console.log('isGood = ' + isGood);
-
           if(isGood) {
-            console.log(el.href);
             return el;
           }
         }
@@ -44,15 +38,13 @@
   <link rel="import" as="document" href="../../iron-demo-helpers/demo-snippet.html">
   <link id="hasBaseCdnUrl" rel-ish="preload" async as="script" data-es="6" data-base="https://cdn.jsdelivr.net/npm/"
     href="xtal-json-merge/build/ES6/json-merge.js" data-tags="json-merge">
-    <!-- <link rel-ish="preload" as="script" data-es="5" data-base="https://cdn.jsdelivr.net/npm/"
-    href="xtal-json-merge/build/ES5/json-merge.js" data-tags="json-merge">   -->
-    <link rel-ish="preload" as="script" data-es="5"
-    href="../../json-merge/json-merge.js" data-tags="json-merge"> 
+    <link rel-ish="preload" as="script" data-es="5" data-base-ref="hasBaseCdnUrl"
+    href="xtal-json-merge/build/ES5/json-merge.js" data-tags="json-merge"> 
   
-  <!-- <link rel-ish="preload" async as="script" data-es="6" data-base-ref="hasBaseCdnUrl"
+  <link rel-ish="preload" async as="script" data-es="6" data-base-ref="hasBaseCdnUrl"
     href="xtal-json-editor/build/ES6/xtal-json-editor.js" data-tags="xtal-json-editor">
   <link rel-ish="preload" async as="script" data-es="5" data-base-ref="hasBaseCdnUrl"
-    href="xtal-json-editor/build/ES6/xtal-json-editor.js" data-tags="xtal-json-editor"> -->
+    href="xtal-json-editor/build/ES5/xtal-json-editor.js" data-tags="xtal-json-editor">
   
   
  

@@ -1,4 +1,3 @@
-console.log(document.currentScript['src']);
 (function () {
     const cs_src = document.currentScript['src'];
     const template = document.createElement('template');
@@ -175,7 +174,6 @@ console.log(document.currentScript['src']);
             BillboardCharts.observedAttributes.forEach(attrib => {
                 this._upgradeProperty(this.snakeToCamel(attrib));
             });
-            console.log('cssrc = ' + cs_src);
             if (!this.cssPath) {
                 this.cssPath = this.absolute(cs_src, 'billboard.min.css');
             }
@@ -208,17 +206,12 @@ console.log(document.currentScript['src']);
             //this.onPropsChange();
         }
         onPropsChange() {
-            console.log('onPropsChange');
-            console.log(this.data);
-            console.log('cssloaded2: ' + this._cssLoaded);
             if (!this._cssLoaded)
                 return;
             if (!this.publish || !this.data || !this.data.data)
                 return;
-            console.log('iah3');
             if (typeof (bb) === 'undefined')
                 return;
-            console.log('iah4');
             this.data.bindto = this.shadowRoot.getElementById('chartTarget');
             if (!this.data.data.onclick) {
                 //debugger;
@@ -227,9 +220,7 @@ console.log(document.currentScript['src']);
                     this.selectedElement = dataPoint;
                 };
             }
-            console.log('here');
             if (!this._chart) {
-                console.log('generate chart');
                 this._chart = bb.generate(this.data);
                 if (this.newData)
                     this.onNewData();
