@@ -16,7 +16,9 @@
   <script>
     document.head.addEventListener('xtal-sip-init', e =>{
       e.detail.tieBreaker = (tagName, candidates) =>{
+        console.log('tagname = ' + tagName)
         const isIE = navigator.userAgent.indexOf('Trident') > -1;
+        console.log('isIE')
         for(let i = 0, ii = candidates.length; i < ii; i++){
           const el = candidates[i];
           //const el = candidate.element;
@@ -26,7 +28,10 @@
           } else{
             if(el.dataset.es === '6') isGood = true;
           }
+          console.log('isGood = ' + isGood);
+
           if(isGood) {
+            console.log(el.href);
             return el;
           }
         }
@@ -34,12 +39,15 @@
       }
     });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.29/xtal-sip-loader.js"></script>
   <link rel-ish="preload" as="document" data-tags="dom-bind,dom-if" href="../../polymer/lib/elements/dom-{1}.html">
   <link rel="import" as="document" href="../../iron-demo-helpers/demo-snippet.html">
-  <link id="hasBaseCdnUrl" rel-ish="preload" async as="script" data-es6 data-base="https://cdn.jsdelivr.net/npm/"
+  <link id="hasBaseCdnUrl" rel-ish="preload" async as="script" data-es="6" data-base="https://cdn.jsdelivr.net/npm/"
     href="xtal-json-merge/build/ES6/json-merge.js" data-tags="json-merge">
-    <link rel-ish="preload" async as="script" data-es5 data-base="https://cdn.jsdelivr.net/npm/"
-    href="xtal-json-merge/build/ES5/json-merge.js" data-tags="json-merge">  
+    <!-- <link rel-ish="preload" as="script" data-es="5" data-base="https://cdn.jsdelivr.net/npm/"
+    href="xtal-json-merge/build/ES5/json-merge.js" data-tags="json-merge">   -->
+    <link rel-ish="preload" as="script" data-es="5"
+    href="../../json-merge/json-merge.js" data-tags="json-merge"> 
   
   <!-- <link rel-ish="preload" async as="script" data-es="6" data-base-ref="hasBaseCdnUrl"
     href="xtal-json-editor/build/ES6/xtal-json-editor.js" data-tags="xtal-json-editor">
@@ -56,7 +64,7 @@
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.27/xtal-sip-loader.js"></script>
+    
   <div class="vertical-section-container centered">
     <h3>Basic billboard-charts demo</h3>
     <xtal-sip></xtal-sip>
@@ -67,7 +75,7 @@
           <template>
             Click on a data point to see the data element below.
             <xtal-sip></xtal-sip>
-            <json-merge watch="{}" result="{{example1}}" delay="1000">
+            <json-merge pass-thru-on-init watch="{}" result="{{example1}}" delay="1000">
               <script type="application/json">
                 [
                   {
