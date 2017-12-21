@@ -11,11 +11,13 @@ export interface IBillboardChartsProperties {
 }
 declare var bb;
 declare var d3;
+console.log(document.currentScript['src']);
+
 (function () {
     interface IDynamicJSLoadStep {
         src?: string;
     }
-    let cs;
+    const cs_src = document.currentScript['src'];
     const template = document.createElement('template');
     // <link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
     template.innerHTML = `
@@ -79,6 +81,7 @@ declare var d3;
             return this._data;
         }
         set data(val){
+            //debugger;
             this._data = val;
             this.onPropsChange();
         }
@@ -216,16 +219,17 @@ declare var d3;
             BillboardCharts.observedAttributes.forEach(attrib =>{
                 this._upgradeProperty(this.snakeToCamel(attrib));
             });
+            console.log('cssrc = ' + cs_src);
             if (!this.cssPath) {
-                this.cssPath = this.absolute(cs.src, 'billboard.min.css');
+                this.cssPath = this.absolute(cs_src, 'billboard.min.css');
             }
             const refs = [] as IDynamicJSLoadStep[];
             if (typeof (d3) !== 'object' && !this.d3Path) {
-                this.d3Path = this.absolute(cs.src, 'd3.js');
+                this.d3Path = this.absolute(cs_src, 'd3.js');
                 refs.push({ src: this.d3Path });
             }
             if (typeof (bb) === 'undefined' && !this.billboardLibPath) {
-                this.billboardLibPath = this.absolute(cs.src, 'billboard.js');
+                this.billboardLibPath = this.absolute(cs_src, 'billboard.js');
                 refs.push({ src: this.billboardLibPath });
             }
             this.downloadJSFilesInParallelButLoadInSequence(refs).then(() => {
@@ -249,9 +253,14 @@ declare var d3;
             //this.onPropsChange();
         }
         onPropsChange() {
+            console.log('onPropsChange');
+            console.log(this.data);
+            console.log('cssloaded2: ' + this._cssLoaded);
             if (!this._cssLoaded) return;
             if (!this.publish || !this.data || !this.data.data) return;
+            console.log('iah3');
             if (typeof (bb) === 'undefined') return;
+            console.log('iah4');
             this.data.bindto = this.shadowRoot.getElementById('chartTarget');
             if (!this.data.data.onclick) {
                 //debugger;
@@ -261,7 +270,9 @@ declare var d3;
                     
                 }
             }
+            console.log('here')
             if (!this._chart) {
+                console.log('generate chart');
                 this._chart = bb.generate(this.data);
                 if (this.newData) this.onNewData();
             } else {
@@ -282,7 +293,7 @@ declare var d3;
     }
     customElements.define(BillboardCharts.is, BillboardCharts);
     //}
-    cs = document.currentScript;
+    
     // function WaitForPolymer()
     // {
 
