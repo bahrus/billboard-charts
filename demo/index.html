@@ -12,7 +12,7 @@
   <script src="https://cdn.polyfill.io/v2/polyfill.js?features=default,fetch"></script>
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <script src="../../json-merge/json-merge.js"></script>
+  <!-- <script src="../../json-merge/json-merge.js"></script> -->
   <script>
     document.head.addEventListener('xtal-sip-init', e =>{
       e.detail.tieBreaker = (tagName, candidates) =>{
@@ -36,9 +36,10 @@
   </script>
   <link rel-ish="preload" as="document" data-tags="dom-bind,dom-if" href="../../polymer/lib/elements/dom-{1}.html">
   <link rel="import" as="document" href="../../iron-demo-helpers/demo-snippet.html">
-  <!-- <link id="hasBaseCdnUrl" rel-ish="preload" async as="script" data-es6 data-base="https://cdn.jsdelivr.net/npm/"
-    href="xtal-json-merge/build/ES6/json-merge.js" data-tags="json-merge"> -->
-  
+  <link id="hasBaseCdnUrl" rel-ish="preload" async as="script" data-es6 data-base="https://cdn.jsdelivr.net/npm/"
+    href="xtal-json-merge/build/ES6/json-merge.js" data-tags="json-merge">
+    <link rel-ish="preload" async as="script" data-es5 data-base="https://cdn.jsdelivr.net/npm/"
+    href="xtal-json-merge/build/ES5/json-merge.js" data-tags="json-merge">  
   
   <!-- <link rel-ish="preload" async as="script" data-es="6" data-base-ref="hasBaseCdnUrl"
     href="xtal-json-editor/build/ES6/xtal-json-editor.js" data-tags="xtal-json-editor">
@@ -55,7 +56,7 @@
 </head>
 
 <body>
-    <script async src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.27/xtal-sip-loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.27/xtal-sip-loader.js"></script>
   <div class="vertical-section-container centered">
     <h3>Basic billboard-charts demo</h3>
     <xtal-sip></xtal-sip>
