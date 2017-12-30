@@ -8,28 +8,14 @@
   <title>billboard-charts demo</title>
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <script src="../billboard-charts.js"></script>
+  
   <script src="https://cdn.polyfill.io/v2/polyfill.js?features=default,fetch"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.37/xtal-sip-loader.js" data-tag="xtal-sip"></script>
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <script>
     document.head.addEventListener('xtal-sip-init', e =>{
-      // e.detail.tieBreaker = (tagName, candidates) =>{
-      //   const isIE = navigator.userAgent.indexOf('Trident') > -1;
-      //   for(let i = 0, ii = candidates.length; i < ii; i++){
-      //     const el = candidates[i];
-      //     let isGood = false;
-      //     if(isIE){
-      //       if(el.dataset.es === '5') isGood = true;
-      //     } else{
-      //       if(el.dataset.es === '6') isGood = true;
-      //     }
-      //     if(isGood) {
-      //       return el;
-      //     }
-      //   }
-        
-      // }
+
       e.detail.substitutor = (relishLink) => {
         if(navigator.userAgent.indexOf('Trident') > -1){
           const currentHREF = relishLink.getAttribute('href');
@@ -45,12 +31,17 @@
   <link rel="import" as="document" href="../../iron-demo-helpers/demo-snippet.html">
   <link id="hasBaseCdnUrl" rel-ish="preload" async as="script" data-base="https://cdn.jsdelivr.net/npm/"
     href="xtal-json-merge/build/ES6/json-merge.js" data-tags="json-merge">
-     
-  
+    
   <link rel-ish="preload" async as="script" data-base-ref="hasBaseCdnUrl"
     href="xtal-json-editor/build/ES6/xtal-json-editor.js" data-tags="xtal-json-editor">
 
-    
+    <!-- <script src="../billboard-charts.js"></script> -->
+  <link id="bb_charts" rel="preload" data-tag="billboard-charts" as="script" href="../billboard-charts.js" data-d3-id="d3_loader" data-bb-js-id="bb_js" data-bb-css-id="bb_css">
+  <link id="d3_loader" rel="preload" as="script" href="https://d3js.org/d3.v4.min.js"> 
+  <link id="bb_js"     rel="preload" as="script" href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js">
+  <link id="bb_css"    rel="preload" as="style"  href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
+
+  
   
  
 
@@ -182,7 +173,7 @@
       </template>
     </demo-snippet>
     
-    <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.34/xtal-sip-loader.js" data-tag="xtal-sip"></script>
+    
   </div>
 </body>
 

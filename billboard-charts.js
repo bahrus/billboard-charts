@@ -175,15 +175,30 @@
                 this._upgradeProperty(this.snakeToCamel(attrib));
             });
             if (!this.cssPath) {
-                this.cssPath = this.absolute(cs_src, 'billboard.min.css');
+                if (BillboardCharts.bbCssId) {
+                    this.cssPath = document.head.querySelector('#' + BillboardCharts.bbCssId).getAttribute('href');
+                }
+                else {
+                    this.cssPath = this.absolute(cs_src, 'billboard.min.css');
+                }
             }
             const refs = [];
             if (typeof (d3) !== 'object' && !this.d3Path) {
-                this.d3Path = this.absolute(cs_src, 'd3.js');
+                if (BillboardCharts.d3Id) {
+                    this.d3Path = document.head.querySelector('#' + BillboardCharts.d3Id).getAttribute('href');
+                }
+                else {
+                    this.d3Path = this.absolute(cs_src, 'd3.js');
+                }
                 refs.push({ src: this.d3Path });
             }
             if (typeof (bb) === 'undefined' && !this.billboardLibPath) {
-                this.billboardLibPath = this.absolute(cs_src, 'billboard.js');
+                if (BillboardCharts.bbJsId) {
+                    this.billboardLibPath = document.head.querySelector('#' + BillboardCharts.bbJsId).getAttribute('href');
+                }
+                else {
+                    this.billboardLibPath = this.absolute(cs_src, 'billboard.js');
+                }
                 refs.push({ src: this.billboardLibPath });
             }
             this.downloadJSFilesInParallelButLoadInSequence(refs).then(() => {
