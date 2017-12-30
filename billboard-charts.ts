@@ -16,7 +16,13 @@ declare var d3;
     interface IDynamicJSLoadStep {
         src?: string;
     }
-    const cs_src = document.currentScript['src'];
+    let cs_src; 
+    let link = document.head.querySelector('link[data-tag="billboard-charts"]');
+    if(link){
+        cs_src = link.getAttribute('href');
+    }else{
+        cs_src = document.currentScript['src'];
+    }
     const template = document.createElement('template');
     // <link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
     template.innerHTML = `
