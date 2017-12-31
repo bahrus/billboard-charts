@@ -10,7 +10,7 @@
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   
   <script src="https://cdn.polyfill.io/v2/polyfill.js?features=default,fetch"></script>
-  <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.37/xtal-sip-loader.js" data-tag="xtal-sip"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.39/xtal-sip-loader.js" data-tag="xtal-sip"></script>
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <script>
@@ -32,13 +32,14 @@
   <link id="hasBaseCdnUrl" rel-ish="preload" async as="script" data-base="https://cdn.jsdelivr.net/npm/"
     href="xtal-json-merge/build/ES6/json-merge.js" data-tags="json-merge">
     
-  <link rel-ish="preload" async as="script" data-base-ref="hasBaseCdnUrl"
+  <link rel-ish="preload" async as="script" data-base-ref="#hasBaseCdnUrl"
     href="xtal-json-editor/build/ES6/xtal-json-editor.js" data-tags="xtal-json-editor">
 
-  <link id="bb_charts" rel="preload" data-tag="billboard-charts" as="script" href="../billboard-charts.js" data-d3-id="d3_loader" data-bb-js-id="bb_js" data-bb-css-id="bb_css">
-  <link id="d3_loader" rel="preload" as="script" href="https://d3js.org/d3.v4.min.js"> 
-  <link id="bb_js"     rel="preload" as="script" href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js">
-  <link id="bb_css"    rel="preload" as="style"  href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
+  <link id="bb_charts" rel="preload" data-tag="billboard-charts" as="script" href="../billboard-charts.js" 
+      data-d3-selector=".billboard.d3" data-billboard-js-selector=".billboard.bb" data-bb-css-selector=".billboard.css">
+  <link class="billboard d3"     rel="preload" as="script" href="https://d3js.org/d3.v4.min.js"> 
+  <link class="billboard bb"     rel="preload" as="script" href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js">
+  <link class="billboard css"    rel="preload" as="style"  href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
 
   <!-- <link id="bb_charts" rel="preload" data-tag="billboard-charts" as="script" href="../billboard-charts.js" > -->
  
