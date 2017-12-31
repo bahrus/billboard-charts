@@ -6,8 +6,8 @@
 ```
 <custom-element-demo>
   <template>
-    <link rel="import" href="https://raw-dot-custom-elements.appspot.com/bahrus/billboard-charts/0.1.11/polymer/lib/elements/dom-bind.html">
-        <link rel="import" href="https://raw-dot-custom-elements.appspot.com/bahrus/billboard-charts/0.1.11/polymer/lib/elements/dom-if.html">
+    <link rel="import" href="https://raw-dot-custom-elements.appspot.com/bahrus/billboard-charts/0.1.13/polymer/lib/elements/dom-bind.html">
+        <link rel="import" href="https://raw-dot-custom-elements.appspot.com/bahrus/billboard-charts/0.1.13/polymer/lib/elements/dom-if.html">
     <link rel="import" href="billboard-charts.html">
     <script async src="https://cdn.jsdelivr.net/npm/xtal-json-merge@0.1.1/build/ES6/json-merge.js"></script>
     <script async src="https://cdn.jsdelivr.net/npm/xtal-json-editor@0.0.12/build/ES6/xtal-json-editor.js"></script>
