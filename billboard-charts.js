@@ -182,8 +182,8 @@
                 this._upgradeProperty(this.snakeToCamel(attrib));
             });
             if (!this.cssPath) {
-                if (BillboardCharts.bbCcssSelector) {
-                    this.cssPath = document.head.querySelector(BillboardCharts.bbCcssSelector).getAttribute('href');
+                if (BillboardCharts.bbCssSelector) {
+                    this.cssPath = document.head.querySelector(BillboardCharts.bbCssSelector).getAttribute('href');
                 }
                 else {
                     this.cssPath = this.absolute(cs_src, 'billboard.min.css');

@@ -10,7 +10,7 @@
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   
   <script src="https://cdn.polyfill.io/v2/polyfill.js?features=default,fetch"></script>
-  <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.40/xtal-sip-loader.js" data-tag="xtal-sip"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.48/xtal-sip-loader.js" data-tag="xtal-sip"></script>
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <script>
@@ -39,7 +39,7 @@
       data-d3-selector=".billboard.d3" data-billboard-js-selector=".billboard.bb" data-bb-css-selector=".billboard.css">
   <link class="billboard d3"     rel="preload" as="script" href="https://d3js.org/d3.v4.min.js"> 
   <link class="billboard bb"     rel="preload" as="script" href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js">
-  <link class="billboard css"    rel="preload" as="style"  href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
+  <link class="billboard css"    rel="preload-ish" as="style"  href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
 
   <!-- <link id="bb_charts" rel="preload" data-tag="billboard-charts" as="script" href="../billboard-charts.js" > -->
  
@@ -55,14 +55,13 @@
     
   <div class="vertical-section-container centered">
     <h3>Basic billboard-charts demo</h3>
-    <xtal-sip></xtal-sip>
+    <xtal-sip load="demo-snippet,dom-bind,dom-if,json-merge,billboard-charts"></xtal-sip>
 
     <demo-snippet>
       <template>
         <dom-bind>
           <template>
             Click on a data point to see the data element below.
-            <xtal-sip></xtal-sip>
             <json-merge pass-thru-on-init watch="{}" result="{{example1}}" delay="1000">
               <script type="application/json">
                 [
@@ -126,8 +125,8 @@
             </json-merge>
             <billboard-charts id="bc" publish data="[[example1]]" new-data="[[newData]]" stale-data="[[staleData]]" selected-element="{{selectedDataPoint}}"></billboard-charts>
             <template is="dom-if" if="[[selectedDataPoint]]">
-                <xtal-sip></xtal-sip>
-              <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
+                <xtal-sip load="xtal-json-editor"></xtal-sip>
+                <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
             </template>
             <json-merge watch="[]" result="{{example2}}">
               <script type="application/json">

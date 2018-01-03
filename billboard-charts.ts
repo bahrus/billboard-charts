@@ -45,7 +45,7 @@ declare var d3;
     class BillboardCharts extends HTMLElement implements IBillboardChartsProperties {
         static d3Selector;
         static billboardJsSelector;
-        static bbCcssSelector;
+        static bbCssSelector;
         _publish: boolean;
 
         get publish(){
@@ -228,8 +228,8 @@ declare var d3;
                 this._upgradeProperty(this.snakeToCamel(attrib));
             });
             if (!this.cssPath) {
-                if(BillboardCharts.bbCcssSelector){
-                    this.cssPath = document.head.querySelector(BillboardCharts.bbCcssSelector).getAttribute('href');
+                if(BillboardCharts.bbCssSelector){
+                    this.cssPath = document.head.querySelector(BillboardCharts.bbCssSelector).getAttribute('href');
                 }else{
                     this.cssPath = this.absolute(cs_src, 'billboard.min.css');
                 }
