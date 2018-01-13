@@ -10,7 +10,8 @@
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   
   <script src="https://cdn.polyfill.io/v2/polyfill.js?features=default,fetch"></script>
-  <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.48/xtal-sip-loader.js" data-tag="xtal-sip"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.51/xtal-sip-loader.js" data-tag="xtal-sip"></script>
+  <link rel="preload" async as="script" data-tag="xtal-sip-plus" href="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.51/xtal-sip-plus.js">
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <script>
@@ -55,7 +56,7 @@
     
   <div class="vertical-section-container centered">
     <h3>Basic billboard-charts demo</h3>
-    <xtal-sip load="demo-snippet,dom-bind,dom-if,json-merge,billboard-charts"></xtal-sip>
+    <xtal-sip load="xtal-sip-plus,demo-snippet,dom-bind,dom-if,json-merge,billboard-charts"></xtal-sip>
 
     <demo-snippet>
       <template>
