@@ -18,6 +18,10 @@ To achieve master / detail functionality, where clicking on an element should no
 <billboard-charts publish data="[[example1]]" selected-element ="{{selectedDataPoint}}"></billboard-charts>
 ```
 
+If you are working within a Polymer web component container, this will allow binding to take place amongst the peers within the containing Polymer component.
+
+To work with other Web Component libraries, you will need to either add some event listening logic (for "selected-element-changed"), or utilize Polymer mixins, as demonstrated [here](https://www.webcomponents.org/element/bahrus/xtal-fetch).
+
 To add/update data, use the new-data attribute / property.  Assuming the id of the billboard chart is "bc", then this adds data imperatively:
 
 ```JavaScript
@@ -36,9 +40,9 @@ Likewise, this removes data:
     };
 ```
 
-If you are working with other Polymer web component container, this will allow binding to take place amongst the peers within the containing Polymer component.
 
-To work with other Web Component libraries, you will need to either add some event listening logic (for "selected-element-changed"), or utilize Polymer mixins, as demonstrated [here](https://www.webcomponents.org/element/bahrus/xtal-fetch).
+
+
 
 
 ## Important note regarding referencing the web component and managing dependencies.
