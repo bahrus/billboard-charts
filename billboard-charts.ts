@@ -173,19 +173,22 @@ declare var d3;
             return this._chart;
         }
         //from https://stackoverflow.com/questions/14780350/convert-relative-path-to-absolute-using-javascript
-        absolute(base, relative) {
-            var stack = base.split("/"),
-                parts = relative.split("/");
+        absolute(base: string, relative: string) {
+            const stack = base.split("/"),
+            const parts = relative.split("/");
             stack.pop(); // remove current file name (or empty string)
             // (omit if "base" is the current folder without trailing slash)
-            for (var i = 0; i < parts.length; i++) {
-                if (parts[i] == ".")
-                    continue;
-                if (parts[i] == "..")
-                    stack.pop();
-                else
-                    stack.push(parts[i]);
-            }
+            parts.forEach(part =>{
+                switch(part){
+                    case '.':
+                        break;
+                    case '..':
+                        stack.pop();
+                        break;
+                    default:
+                        stack.push(part);
+                }
+            })
             return stack.join("/");
         }
         downloadJSFilesInParallelButLoadInSequence(refs: IDynamicJSLoadStep[]) {
