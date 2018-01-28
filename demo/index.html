@@ -10,8 +10,8 @@
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   
   <script src="https://cdn.polyfill.io/v2/polyfill.js?features=default,fetch"></script>
-  <script src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.51/xtal-sip-loader.js" data-tag="xtal-sip"></script>
-  <link rel="preload" async as="script" data-tag="xtal-sip-plus" href="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.51/xtal-sip-plus.js">
+  <script id="xtal_sip" src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.53/xtal-sip-loader.js"></script>
+  <link id="xtal_sip_plus" rel="preload" async as="script" href="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.53/xtal-sip-plus.js">
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
   <script>
@@ -30,13 +30,14 @@
   
   <link rel-ish="preload" as="document" data-tags="dom-bind,dom-if" href="../../polymer/lib/elements/dom-{1}.html">
   <link rel="import" as="document" href="../../iron-demo-helpers/demo-snippet.html">
-  <link id="hasBaseCdnUrl" rel-ish="preload" async as="script" data-base="https://cdn.jsdelivr.net/npm/"
+  <link id="hasBaseCdnUrl" rel="preconnect" href="https://cdn.jsdelivr.net/npm/">
+  <link rel-ish="preload" async as="script" data-base-ref="hasBaseCdnUrl"
     href="xtal-json-merge/build/ES6/json-merge.js" data-tags="json-merge">
     
-  <link rel-ish="preload" async as="script" data-base-ref="#hasBaseCdnUrl"
+  <link rel-ish="preload" async as="script" data-base-ref="hasBaseCdnUrl"
     href="xtal-json-editor/build/ES6/xtal-json-editor.js" data-tags="xtal-json-editor">
 
-  <link id="bb_charts" rel="preload" data-tag="billboard-charts" as="script" href="../billboard-charts.js" 
+  <link id="billboard_charts" rel="preload" as="script" href="../billboard-charts.js" 
       data-d3-selector=".billboard.d3" data-billboard-js-selector=".billboard.bb" data-bb-css-selector=".billboard.css">
   <link class="billboard d3"     rel="preload" as="script" href="https://d3js.org/d3.v4.min.js"> 
   <link class="billboard bb"     rel="preload" as="script" href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js">
@@ -124,7 +125,11 @@
                 ]
               </script>
             </json-merge>
-            <billboard-charts id="bc" publish data="[[example1]]" new-data="[[newData]]" stale-data="[[staleData]]" selected-element="{{selectedDataPoint}}"></billboard-charts>
+            <!-- <input type="checkbox" checked="{{toggle::change}}">
+            <template is="dom-if" if="[[toggle]]"> -->
+              <billboard-charts id="bc" publish data="[[example1]]" new-data="[[newData]]" stale-data="[[staleData]]" selected-element="{{selectedDataPoint}}"></billboard-charts>
+            <!-- </template> -->
+            
             <template is="dom-if" if="[[selectedDataPoint]]">
                 <xtal-sip load="xtal-json-editor"></xtal-sip>
                 <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
