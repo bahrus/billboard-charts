@@ -11,15 +11,15 @@ export interface IBillboardChartsProperties {
 }
 declare var bb;
 declare var d3;
+declare var billboard_charts : HTMLLinkElement;
 
 (function () {
     interface IDynamicJSLoadStep {
         src?: string;
     }
     let cs_src; 
-    let link = document.head.querySelector('link[data-tag="billboard-charts"]');
-    if(link){
-        cs_src = link.getAttribute('href');
+    if(billboard_charts){
+        cs_src = billboard_charts.href;
     }else{
         cs_src = document.currentScript['src'];
     }
