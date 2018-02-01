@@ -37,7 +37,7 @@
             display: block;
         }
     </style>
-    <div id="chartTarget"></div>`;
+    <div id="chartTarget" style="visibility:hidden"></div>`;
     const cs_src = billboard_charts ? billboard_charts.href : document.currentScript.src;
     const stack = cs_src.split('/');
     stack.pop();
@@ -64,12 +64,6 @@
          * @demo demo/index.html
          */
         class BillboardCharts extends HTMLElement {
-            constructor() {
-                super();
-                this._cssLoaded = false;
-                this.attachShadow({ mode: 'open' });
-                this.shadowRoot.appendChild(template.content.cloneNode(true));
-            }
             get publish() {
                 return this._publish;
             }
@@ -125,10 +119,16 @@
             get selectedElement() {
                 return this._selectedElement;
             }
+            //private _cssLoaded = false;
             static get observedAttributes() {
                 return ['publish', 'css-path', 'data', 'newData', 'staleData'];
             }
             static get is() { return 'billboard-charts'; }
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+                this.shadowRoot.appendChild(template.content.cloneNode(true));
+            }
             _upgradeProperty(prop) {
                 if (this.hasOwnProperty(prop)) {
                     let value = this[prop];
@@ -172,19 +172,17 @@
                 link.setAttribute('type', "text/css");
                 link.setAttribute('href', this._cssPath);
                 link.addEventListener('load', e => {
-                    this._cssLoaded = true;
-                    this.onPropsChange();
+                    this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
                 });
                 this.shadowRoot.appendChild(link);
             }
-            loaded() {
-                this._cssLoaded = true;
-                setTimeout(() => this.onPropsChange(), 100);
-                //this.onPropsChange();
-            }
+            // loaded() {
+            //     this._cssLoaded = true;
+            //     setTimeout(() => this.onPropsChange(), 100);
+            //     //this.onPropsChange();
+            // }
             onPropsChange() {
-                if (!this._cssLoaded)
-                    return;
+                //if (!this._cssLoaded) return;
                 if (!this.publish || !this.data || !this.data.data)
                     return;
                 this.data.bindto = this.shadowRoot.getElementById('chartTarget');
