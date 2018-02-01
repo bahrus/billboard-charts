@@ -109,22 +109,6 @@ declare var billboard_charts: HTMLLinkElement;
                 this.setAttribute('css-path', val);
             }
 
-            // _d3Path: string;
-            // get d3Path() {
-            //     return this._d3Path;
-            // }
-            // set d3Path(val) {
-            //     this.setAttribute('d3-path', val)
-            // }
-
-            // _billboardLibPath;
-            // get billboardLibPath() {
-            //     return this._billboardLibPath;
-            // }
-            // set billboardLibPath(val) {
-            //     this.setAttribute('billboard-lib-path', val);
-            // }
-
             _data: any;
             get data() {
                 return this._data;
@@ -176,7 +160,7 @@ declare var billboard_charts: HTMLLinkElement;
             private _cssLoaded = false;
 
             static get observedAttributes() {
-                return ['publish', 'css-path', 'd3-path', 'billboard-lib-path', 'data', 'newData', 'staleData'];
+                return ['publish', 'css-path', 'data', 'newData', 'staleData'];
             }
 
             static get is() { return 'billboard-charts'; }
@@ -195,10 +179,7 @@ declare var billboard_charts: HTMLLinkElement;
                 }
             }
             attributeChangedCallback(name, oldValue, newValue) {
-                // console.log({
-                //     name: name,
-                //     newValue: newValue
-                // })
+                
                 switch (name) {
 
                     case 'publish':
@@ -254,7 +235,6 @@ declare var billboard_charts: HTMLLinkElement;
             onPropsChange() {
                 if (!this._cssLoaded) return;
                 if (!this.publish || !this.data || !this.data.data) return;
-                if (typeof (bb) === 'undefined') return;
                 this.data.bindto = this.shadowRoot.getElementById('chartTarget');
                 if (!this.data.data.onclick) {
                     //debugger;

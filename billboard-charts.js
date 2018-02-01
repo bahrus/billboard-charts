@@ -126,7 +126,7 @@
                 return this._selectedElement;
             }
             static get observedAttributes() {
-                return ['publish', 'css-path', 'd3-path', 'billboard-lib-path', 'data', 'newData', 'staleData'];
+                return ['publish', 'css-path', 'data', 'newData', 'staleData'];
             }
             static get is() { return 'billboard-charts'; }
             _upgradeProperty(prop) {
@@ -137,10 +137,6 @@
                 }
             }
             attributeChangedCallback(name, oldValue, newValue) {
-                // console.log({
-                //     name: name,
-                //     newValue: newValue
-                // })
                 switch (name) {
                     case 'publish':
                         this._publish = newValue !== null;
@@ -190,8 +186,6 @@
                 if (!this._cssLoaded)
                     return;
                 if (!this.publish || !this.data || !this.data.data)
-                    return;
-                if (typeof (bb) === 'undefined')
                     return;
                 this.data.bindto = this.shadowRoot.getElementById('chartTarget');
                 if (!this.data.data.onclick) {
