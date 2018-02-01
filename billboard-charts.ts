@@ -58,15 +58,15 @@ declare var billboard_charts: HTMLLinkElement;
         }
     </style>
     <div id="chartTarget" style="visibility:hidden"></div>`;
-    const cs_src = billboard_charts ? billboard_charts.href : (document.currentScript as HTMLScriptElement).src
-    const stack = cs_src.split('/'); stack.pop(); const base = stack.join('/');
+    const cs_src = self['billboard_charts'] ? billboard_charts.href : (document.currentScript as HTMLScriptElement).src
+    const base = cs_src.split('/').slice(0, -1).join('/');
     const refs = [] as IDynamicJSLoadStep[];
     if (typeof (d3) !== 'object') {
-        const d3Path = _d3 ? _d3.href : base + '/d3.min.js';
+        const d3Path = self['_d3'] ? _d3.href : base + '/d3.min.js';
         refs.push({ src: d3Path });
     }
     if (typeof (bb) === 'undefined') {
-        const bbPath = _bb ? _bb.href : base + '/billboard.min.js';
+        const bbPath = self['_bb'] ? _bb.href : base + '/billboard.min.js';
         refs.push({ src: bbPath });
     }
     downloadJSFilesInParallelButLoadInSequence(refs).then(() => {
