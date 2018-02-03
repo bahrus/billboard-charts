@@ -3,8 +3,97 @@
 # \<billboard-charts\>
 
 
-
 \<billboard-charts\> is a dependency-free web component wrapper around the [billboard.js](https://naver.github.io/billboard.js/) hit library. 
+
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="../polymer/lib/elements/dom-bind.html">
+    <script src="billboard-charts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xtal-json-merge/build/ES6/json-merge.js"></script>
+    <dom-bind>
+          <template>
+            <json-merge pass-thru-on-init 
+                watch="{}" 
+                result="{{example1}}" 
+                delay="1000">
+              <script type="application/json">
+                [
+                  {
+                    "data": {
+                      "columns": [
+                        [
+                          "Bodak Yellow (Money Moves)",
+                          30,
+                          200,
+                          100,
+                          400,
+                          150,
+                          250
+                        ],
+                        [
+                          "Wild Thoughts",
+                          50,
+                          20,
+                          10,
+                          40,
+                          15,
+                          25
+                        ]
+                      ]
+                    }
+                  }
+                ]
+              </script>              
+            </json-merge>
+            <json-merge 
+                watch="{}" 
+                result="{{newData}}" 
+                delay="2000"
+            >
+              <script type="application/json">
+                [
+                  {
+                    "columns": [
+                      ["Despacito", 230, 190, 300, 500, 300, 400]
+                    ]
+                  }
+                ]
+              </script>
+            </json-merge>
+            <json-merge watch="{}" result="{{newData}}" delay="3500">
+              <script type="application/json">
+                [
+                  {
+                    "columns": [
+                      ["Believer", 130, 150, 200, 300, 200, 100]
+                    ]
+                  }
+                ]
+              </script>
+            </json-merge>
+            <json-merge watch="{}" result="{{staleData}}" delay="6500">
+              <script type="application/json">
+                [
+                  {
+                    "ids": "Bodak Yellow (Money Moves)"
+                  }
+                ]
+              </script>
+            </json-merge>
+            
+              <billboard-charts 
+                publish data="[[example1]]" 
+                new-data="[[newData]]" 
+                stale-data="[[staleData]]" >
+            </billboard-charts>
+          </template>
+    </dom-bind>
+  </template>
+</custom-element-demo>
+```
+-->
 
 Data can be passed into the component via the data property, either via binding, or programatically.  The boolean "publish" will block rendering if it isn't present.  This allows one to apply sanity checks on displaying new data.
 
