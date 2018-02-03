@@ -208,15 +208,5 @@
         }
         customElements.define(BillboardCharts.is, BillboardCharts);
     }
-    //}
-    // function WaitForPolymer()
-    // {
-    //     if ((typeof Polymer !== 'function') || (typeof Polymer.ElementMixin !== 'function')) {
-    //        setTimeout( WaitForPolymer, 100);
-    //        return;
-    //     }
-    //     initBillboardCharts(Polymer.ElementMixin);
-    // }
-    // WaitForPolymer();
 })();
 //# sourceMappingURL=billboard-charts.js.map

@@ -9,9 +9,10 @@
 ```
 <custom-element-demo>
   <template>
-    <link rel="import" href="../polymer/lib/elements/dom-bind.html">
     <script src="billboard-charts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xtal-json-merge/build/ES6/json-merge.js"></script>
+    <link rel="import" href="../polymer/lib/elements/dom-bind.html">
+
     <dom-bind>
           <template>
             <json-merge pass-thru-on-init 
