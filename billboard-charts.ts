@@ -70,6 +70,7 @@ declare var billboard_charts: HTMLLinkElement;
         refs.push({ src: bbPath });
     }
     downloadJSFilesInParallelButLoadInSequence(refs).then(() => {
+        console.log('initBillboarcCharts');
         initBillboardCharts();
     })
 
@@ -201,18 +202,12 @@ declare var billboard_charts: HTMLLinkElement;
             }
 
             connectedCallback() {
-                //super.connectedCallback();
-                //if (!this.baseUrlPath) this.baseUrlPath = '';
+                console.log('connectedCallback');
                 BillboardCharts.observedAttributes.forEach(attrib => {
                     this._upgradeProperty(this.snakeToCamel(attrib));
                 });
                 if (!this.cssPath) {
-                    if (BillboardCharts.bbCssSelector) {
-                        this.cssPath = document.head.querySelector(BillboardCharts.bbCssSelector).getAttribute('href');
-                    } else {
-                        this.cssPath = base +  '/billboard.min.css';
-                    }
-
+                    this.cssPath = base +  '/billboard.min.css';
                 }
 
                 //<link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">

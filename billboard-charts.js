@@ -50,6 +50,7 @@
         refs.push({ src: bbPath });
     }
     downloadJSFilesInParallelButLoadInSequence(refs).then(() => {
+        console.log('initBillboarcCharts');
         initBillboardCharts();
     });
     function initBillboardCharts() {
@@ -151,18 +152,12 @@
                 return s.replace(/(\-\w)/g, function (m) { return m[1].toUpperCase(); });
             }
             connectedCallback() {
-                //super.connectedCallback();
-                //if (!this.baseUrlPath) this.baseUrlPath = '';
+                console.log('connectedCallback');
                 BillboardCharts.observedAttributes.forEach(attrib => {
                     this._upgradeProperty(this.snakeToCamel(attrib));
                 });
                 if (!this.cssPath) {
-                    if (BillboardCharts.bbCssSelector) {
-                        this.cssPath = document.head.querySelector(BillboardCharts.bbCssSelector).getAttribute('href');
-                    }
-                    else {
-                        this.cssPath = base + '/billboard.min.css';
-                    }
+                    this.cssPath = base + '/billboard.min.css';
                 }
                 //<link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
                 const link = document.createElement('link');
