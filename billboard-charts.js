@@ -164,6 +164,8 @@
                 link.setAttribute('href', this._cssPath);
                 link.addEventListener('load', e => {
                     this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
+                    if (this._chart)
+                        this._chart.resize();
                 });
                 this.shadowRoot.appendChild(link);
             }
