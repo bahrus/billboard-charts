@@ -70,7 +70,6 @@ declare var billboard_charts: HTMLLinkElement;
         refs.push({ src: bbPath });
     }
     downloadJSFilesInParallelButLoadInSequence(refs).then(() => {
-        console.log('initBillboarcCharts');
         initBillboardCharts();
     })
 
