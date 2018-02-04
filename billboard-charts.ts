@@ -201,7 +201,6 @@ declare var billboard_charts: HTMLLinkElement;
             }
 
             connectedCallback() {
-                console.log('connectedCallback');
                 BillboardCharts.observedAttributes.forEach(attrib => {
                     this._upgradeProperty(this.snakeToCamel(attrib));
                 });
