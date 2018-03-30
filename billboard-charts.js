@@ -31,13 +31,6 @@
     }
     const template = document.createElement('template');
     // <link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
-    template.innerHTML = `
-    <style>
-         :host {
-            display: block;
-        }
-    </style>
-    <div id="chartTarget" style="visibility:hidden"></div>`;
     const cs_src = self['billboard_charts'] ? billboard_charts.href : document.currentScript.src;
     const base = cs_src.split('/').slice(0, -1).join('/');
     const refs = [];
@@ -49,9 +42,43 @@
         const bbPath = self['_bb'] ? _bb.href : base + '/billboard.min.js';
         refs.push({ src: bbPath });
     }
-    downloadJSFilesInParallelButLoadInSequence(refs).then(() => {
-        initBillboardCharts();
-    });
+    function loadCssPaths(paths, css) {
+        if (paths.length === 0) {
+            template.innerHTML = `
+            <style>
+                 :host {
+                    display: block;
+                }
+                ${css.join('')}
+            </style>
+            <div id="chartTarget" style="visibility:hidden"></div>`;
+            downloadJSFiles();
+            return;
+        }
+        const href = paths.pop();
+        fetch(href).then(resp => {
+            resp.text().then(txt => {
+                css.push(txt);
+                loadCssPaths(paths, css);
+            });
+        });
+    }
+    function loadCss() {
+        loadCssPaths([].slice.call(document.head.querySelectorAll('.billboard.css')), []);
+    }
+    if (document.readyState !== "loading") {
+        loadCss();
+    }
+    else {
+        document.addEventListener("DOMContentLoaded", e => {
+            loadCss();
+        });
+    }
+    function downloadJSFiles() {
+        downloadJSFilesInParallelButLoadInSequence(refs).then(() => {
+            initBillboardCharts();
+        });
+    }
     function initBillboardCharts() {
         /**
          * `billboard-charts`
