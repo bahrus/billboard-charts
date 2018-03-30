@@ -1,5 +1,5 @@
 export interface IBillboardChartsProperties {
-    cssPath: string | polymer.PropObjectType,
+    //cssPath: string | polymer.PropObjectType,
     //d3Path: string | polymer.PropObjectType,
     //billboardLibPath: string | polymer.PropObjectType,
     //baseUrlPath: string | polymer.PropObjectType,
@@ -20,6 +20,7 @@ declare var billboard_charts: HTMLLinkElement;
         src?: string;
     }
     if (customElements.get('billboard-charts')) return;
+    const cs_src = self['billboard_charts'] ? billboard_charts.href : (document.currentScript as HTMLScriptElement).src
     function downloadJSFilesInParallelButLoadInSequence(refs: IDynamicJSLoadStep[]) {
         //see https://www.html5rocks.com/en/tutorials/speed/script-loading/
         return new Promise((resolve, reject) => {
@@ -52,7 +53,7 @@ declare var billboard_charts: HTMLLinkElement;
     const template = document.createElement('template');
     // <link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
 
-    const cs_src = self['billboard_charts'] ? billboard_charts.href : (document.currentScript as HTMLScriptElement).src
+    
     const base = cs_src.split('/').slice(0, -1).join('/');
     const refs = [] as IDynamicJSLoadStep[];
     if (typeof (d3) !== 'object') {
@@ -63,8 +64,8 @@ declare var billboard_charts: HTMLLinkElement;
         const bbPath = self['_bb'] ? _bb.href : base + '/billboard.min.js';
         refs.push({ src: bbPath });
     }
-    function loadCssPaths(paths: string[], css: string[]){
-        if(paths.length === 0){
+    function loadCssPaths(links: HTMLLinkElement[], css: string[]){
+        if(links.length === 0){
             template.innerHTML = `
             <style>
                  :host {
@@ -72,15 +73,15 @@ declare var billboard_charts: HTMLLinkElement;
                 }
                 ${css.join('')}
             </style>
-            <div id="chartTarget" style="visibility:hidden"></div>`;
+            <div id="chartTarget"></div>`;
             downloadJSFiles();
             return;
         }
-        const href = paths.pop();
-        fetch(href).then(resp =>{
+        const link = links.pop();
+        fetch(link.href).then(resp =>{
             resp.text().then(txt =>{
                 css.push(txt);
-                loadCssPaths(paths, css);
+                loadCssPaths(links, css);
             })
         })
 
@@ -115,7 +116,7 @@ declare var billboard_charts: HTMLLinkElement;
         class BillboardCharts extends HTMLElement implements IBillboardChartsProperties {
             //static d3Selector;
             //static billboardJsSelector;
-            static bbCssSelector;
+            //static bbCssSelector;
             _publish: boolean;
 
             get publish() {
@@ -130,13 +131,7 @@ declare var billboard_charts: HTMLLinkElement;
 
             }
 
-            _cssPath: string;
-            get cssPath() {
-                return this._cssPath;
-            }
-            set cssPath(val) {
-                this.setAttribute('css-path', val);
-            }
+
 
             _data: any;
             get data() {
@@ -186,10 +181,9 @@ declare var billboard_charts: HTMLLinkElement;
             }
 
             private _chart: any;
-            //private _cssLoaded = false;
 
             static get observedAttributes() {
-                return ['publish', 'css-path', 'data', 'newData', 'staleData'];
+                return ['publish', 'data', 'newData', 'staleData'];
             }
 
             static get is() { return 'billboard-charts'; }
@@ -233,20 +227,20 @@ declare var billboard_charts: HTMLLinkElement;
                 BillboardCharts.observedAttributes.forEach(attrib => {
                     this._upgradeProperty(this.snakeToCamel(attrib));
                 });
-                if (!this.cssPath) {
-                    this.cssPath = base +  '/billboard.min.css';
-                }
+                // if (!this.cssPath) {
+                //     this.cssPath = base +  '/billboard.min.css';
+                // }
 
-                //<link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
-                const link = document.createElement('link');
-                link.setAttribute('rel', 'stylesheet');
-                link.setAttribute('type', "text/css");
-                link.setAttribute('href', this._cssPath);
-                link.addEventListener('load', e => {
-                    this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
-                    if(this._chart) this._chart.resize();
-                });
-                this.shadowRoot.appendChild(link);
+                // //<link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
+                // const link = document.createElement('link');
+                // link.setAttribute('rel', 'stylesheet');
+                // link.setAttribute('type', "text/css");
+                // link.setAttribute('href', this._cssPath);
+                // link.addEventListener('load', e => {
+                //     this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
+                //     if(this._chart) this._chart.resize();
+                // });
+                // this.shadowRoot.appendChild(link);
             }
 
             // loaded() {

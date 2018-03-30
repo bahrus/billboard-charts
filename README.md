@@ -158,13 +158,23 @@ By default, \<billboard-charts\> loads its dependencies from the same directory 
 The id's are important.
 
 
-billboard-charts.js also loads a default billboard.css file from its directory.  You can override this default path for the css file that "ships" with the web component, to achieve your own look and feel by referencing your customized css file.  You can do so by using the setting shown below:
+billboard-charts.js also loads a default billboard.css file from its directory.  You can override this default path for the css file that "ships" with the web component, to achieve your own look and feel by referencing your customized css file.  You can do so by adding another preload tag to the header:
+
+
 
 ```html
-    <billboard-charts css-path="...">
+    <link class="billboard css"    rel="preload" as="fetch"  href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
 ``` 
 
+Unfortunately, Chrome will download this file twice.  Firefox will download it once, but that's because it seems to ignore this preload directive.  
 
+To avoid that duplicate downloading from Chrome, change the attibute to something neither Chrome nor Firefox understand:
+
+```html
+    <link class="billboard css"   relx="preload" as="fetch"  href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
+```
+
+Don't ask me, none of this makes sense to me.  If makes sense to you, please let me know, thanks!
 
 ## Install the Polymer-CLI
 

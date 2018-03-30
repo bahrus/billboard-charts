@@ -1,6 +1,7 @@
 (function () {
     if (customElements.get('billboard-charts'))
         return;
+    const cs_src = self['billboard_charts'] ? billboard_charts.href : document.currentScript.src;
     function downloadJSFilesInParallelButLoadInSequence(refs) {
         //see https://www.html5rocks.com/en/tutorials/speed/script-loading/
         return new Promise((resolve, reject) => {
@@ -31,7 +32,6 @@
     }
     const template = document.createElement('template');
     // <link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
-    const cs_src = self['billboard_charts'] ? billboard_charts.href : document.currentScript.src;
     const base = cs_src.split('/').slice(0, -1).join('/');
     const refs = [];
     if (typeof (d3) !== 'object') {
@@ -42,8 +42,8 @@
         const bbPath = self['_bb'] ? _bb.href : base + '/billboard.min.js';
         refs.push({ src: bbPath });
     }
-    function loadCssPaths(paths, css) {
-        if (paths.length === 0) {
+    function loadCssPaths(links, css) {
+        if (links.length === 0) {
             template.innerHTML = `
             <style>
                  :host {
@@ -51,15 +51,15 @@
                 }
                 ${css.join('')}
             </style>
-            <div id="chartTarget" style="visibility:hidden"></div>`;
+            <div id="chartTarget"></div>`;
             downloadJSFiles();
             return;
         }
-        const href = paths.pop();
-        fetch(href).then(resp => {
+        const link = links.pop();
+        fetch(link.href).then(resp => {
             resp.text().then(txt => {
                 css.push(txt);
-                loadCssPaths(paths, css);
+                loadCssPaths(links, css);
             });
         });
     }
@@ -100,12 +100,6 @@
                     this.removeAttribute('publish');
                 }
             }
-            get cssPath() {
-                return this._cssPath;
-            }
-            set cssPath(val) {
-                this.setAttribute('css-path', val);
-            }
             get data() {
                 return this._data;
             }
@@ -144,9 +138,8 @@
             get selectedElement() {
                 return this._selectedElement;
             }
-            //private _cssLoaded = false;
             static get observedAttributes() {
-                return ['publish', 'css-path', 'data', 'newData', 'staleData'];
+                return ['publish', 'data', 'newData', 'staleData'];
             }
             static get is() { return 'billboard-charts'; }
             constructor() {
@@ -181,20 +174,19 @@
                 BillboardCharts.observedAttributes.forEach(attrib => {
                     this._upgradeProperty(this.snakeToCamel(attrib));
                 });
-                if (!this.cssPath) {
-                    this.cssPath = base + '/billboard.min.css';
-                }
-                //<link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
-                const link = document.createElement('link');
-                link.setAttribute('rel', 'stylesheet');
-                link.setAttribute('type', "text/css");
-                link.setAttribute('href', this._cssPath);
-                link.addEventListener('load', e => {
-                    this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
-                    if (this._chart)
-                        this._chart.resize();
-                });
-                this.shadowRoot.appendChild(link);
+                // if (!this.cssPath) {
+                //     this.cssPath = base +  '/billboard.min.css';
+                // }
+                // //<link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
+                // const link = document.createElement('link');
+                // link.setAttribute('rel', 'stylesheet');
+                // link.setAttribute('type', "text/css");
+                // link.setAttribute('href', this._cssPath);
+                // link.addEventListener('load', e => {
+                //     this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
+                //     if(this._chart) this._chart.resize();
+                // });
+                // this.shadowRoot.appendChild(link);
             }
             // loaded() {
             //     this._cssLoaded = true;
