@@ -64,7 +64,13 @@
         });
     }
     function loadCss() {
-        loadCssPaths([].slice.call(document.head.querySelectorAll('.billboard.css')), []);
+        let links = [].slice.call(document.head.querySelectorAll('.billboard.css'));
+        if (links.length === 0) {
+            links = [{
+                    href: 'https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css'
+                }];
+        }
+        loadCssPaths(links, []);
     }
     if (document.readyState !== "loading") {
         loadCss();
