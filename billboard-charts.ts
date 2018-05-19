@@ -3,11 +3,11 @@ export interface IBillboardChartsProperties {
     //d3Path: string | polymer.PropObjectType,
     //billboardLibPath: string | polymer.PropObjectType,
     //baseUrlPath: string | polymer.PropObjectType,
-    publish: boolean | polymer.PropObjectType,
-    data: any | polymer.PropObjectType,
-    newData: object | polymer.PropObjectType,
-    selectedElement: object | polymer.PropObjectType,
-    staleData: object | polymer.PropObjectType,
+    publish: boolean,
+    data: any,
+    newData: object,
+    selectedElement: object,
+    staleData: object,
 }
 declare var bb;
 declare var _bb: HTMLLinkElement;
@@ -78,7 +78,7 @@ declare var billboard_charts: HTMLLinkElement;
             return;
         }
         const link = links.pop();
-        fetch(link.href,{credentials: 'include'}).then(resp =>{
+        fetch(link.href,{credentials: 'same-origin'}).then(resp =>{
             resp.text().then(txt =>{
                 css.push(txt);
                 loadCssPaths(links, css);

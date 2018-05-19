@@ -56,7 +56,7 @@
             return;
         }
         const link = links.pop();
-        fetch(link.href, { credentials: 'include' }).then(resp => {
+        fetch(link.href, { credentials: 'same-origin' }).then(resp => {
             resp.text().then(txt => {
                 css.push(txt);
                 loadCssPaths(links, css);

@@ -1,184 +1,148 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>billboard-charts demo</title>
 
-  <title>billboard-charts demo</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  
-  <script src="https://cdn.polyfill.io/v2/polyfill.js?features=default,fetch"></script>
-  <script id="xtal_sip" src="https://cdn.jsdelivr.net/npm/xtal-sip@0.0.56/xtal-sip-loader.js"></script>
-  <link rel="import" href="../../polymer/polymer.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <script>
-    document.head.addEventListener('xtal-sip-init', e =>{
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+      import '@polymer/polymer/lib/elements/dom-bind.js';
+      import '@polymer/polymer/lib/elements/dom-if.js'
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/xtal-json-merge/xtal-json-merge.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xtal-json-editor/xtal-json-editor.js"></script>
+    <script src="../billboard-charts.js"></script>
 
-      e.detail.substitutor = (relishLink) => {
-        if(navigator.userAgent.indexOf('Trident') > -1){
-          const currentHREF = relishLink.getAttribute('href');
-          relishLink.setAttribute('href', currentHREF.replace('ES6', 'ES5'));
-        }
-          
-      };
-    });
-  </script>
-  
-  
-  <link rel-ish="preload" as="document" data-tags="dom-bind,dom-if" href="../../polymer/lib/elements/dom-{1}.html">
-  <link rel="import" as="document" href="../../iron-demo-helpers/demo-snippet.html">
-  <link id="hasBaseCdnUrl" rel="preconnect" href="https://cdn.jsdelivr.net/npm/">
-  <link rel-ish="preload" async as="script" data-base-ref="hasBaseCdnUrl"
-    href="xtal-json-merge/build/ES6/json-merge.js" data-tags="json-merge">
-    
-  <link rel-ish="preload" async as="script" data-base-ref="hasBaseCdnUrl"
-    href="xtal-json-editor/build/ES6/xtal-json-editor.js" data-tags="xtal-json-editor">
-
-  <link id="billboard_charts" rel="preload" as="script" href="../billboard-charts.js" 
-      data-d3-selector=".billboard.d3" data-billboard-js-selector=".billboard.bb" data-bb-css-selector=".billboard.css">
-  <link id="_d3"     rel="preload" as="script" href="https://d3js.org/d3.v4.min.js"> 
-  <link id="_bb"     rel="preload" as="script" href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js">
-  <link class="billboard css"   rel="preload" as="fetch"  href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
-
-  <!-- <link id="bb_charts" rel="preload" data-tag="billboard-charts" as="script" href="../billboard-charts.js" > -->
- 
- 
-
-  <custom-style>
-    <style is="custom-style" include="demo-pages-shared-styles">
-    </style>
-  </custom-style>
-</head>
-
-<body>
-    
-  <div class="vertical-section-container centered">
-    <h3>Basic billboard-charts demo</h3>
-    <xtal-sip load="demo-snippet,dom-bind,dom-if,json-merge,billboard-charts"></xtal-sip>
-
-    <demo-snippet>
-      <template>
-        <dom-bind>
-          <template>
-            Click on a data point to see the data element below.
-            <json-merge pass-thru-on-init watch="{}" result="{{example1}}" delay="1000">
-              <script type="application/json">
-                [
-                  {
-                    "data": {
-                      "columns": [
-                        [
-                          "Bodak Yellow (Money Moves)",
-                          30,
-                          200,
-                          100,
-                          400,
-                          150,
-                          250
-                        ],
-                        [
-                          "Wild Thoughts",
-                          50,
-                          20,
-                          10,
-                          40,
-                          15,
-                          25
-                        ]
-                      ]
-                    }
-                  }
-                ]
-              </script>              
-            </json-merge>
-            <json-merge watch="{}" result="{{newData}}" delay="2000">
-              <script type="application/json">
-                [
-                  {
-                    "columns": [
-                      ["Despacito", 230, 190, 300, 500, 300, 400]
-                    ]
-                  }
-                ]
-              </script>
-            </json-merge>
-            <json-merge watch="{}" result="{{newData}}" delay="3500">
-              <script type="application/json">
-                [
-                  {
-                    "columns": [
-                      ["Believer", 130, 150, 200, 300, 200, 100]
-                    ]
-                  }
-                ]
-              </script>
-            </json-merge>
-            <json-merge watch="{}" result="{{staleData}}" delay="6500">
-              <script type="application/json">
-                [
-                  {
-                    "ids": "Bodak Yellow (Money Moves)"
-                  }
-                ]
-              </script>
-            </json-merge>
-            <!-- <input type="checkbox" checked="{{toggle::change}}">
-            <template is="dom-if" if="[[toggle]]"> -->
-              <billboard-charts id="bc" publish data="[[example1]]" new-data="[[newData]]" stale-data="[[staleData]]" selected-element="{{selectedDataPoint}}"></billboard-charts>
-            <!-- </template> -->
-            
-            <template is="dom-if" if="[[selectedDataPoint]]">
-                <xtal-sip load="xtal-json-editor"></xtal-sip>
-                <xtal-json-editor watch="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
-            </template>
-            <json-merge watch="[]" result="{{example2}}">
-              <script type="application/json">
-                [
-                  {
-                    "data": {
-                      "columns": [
-                        ["data", 91.4]
-                      ],
-                      "type": "gauge"
-                    },
-                    "gauge": {},
-                    "color": {
-                      "pattern": [
-                        "#FF0000",
-                        "#F97600",
-                        "#F6C600",
-                        "#60B044"
-                      ],
-                      "threshold": {
-                        "values": [
-                          30,
-                          60,
-                          90,
-                          100
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic billboard-charts demo</h3>
+      <demo-snippet>
+        <template>
+          <dom-bind>
+            <template>
+              Click on a data point to see the data element below.
+              <xtal-json-merge pass-thru-on-init input="{}" merged-prop="{{example1}}" delay="1000">
+                <script type="application/json">
+                  [
+                    {
+                      "data": {
+                        "columns": [
+                          [
+                            "Bodak Yellow (Money Moves)",
+                            30,
+                            200,
+                            100,
+                            400,
+                            150,
+                            250
+                          ],
+                          [
+                            "Wild Thoughts",
+                            50,
+                            20,
+                            10,
+                            40,
+                            15,
+                            25
+                          ]
                         ]
                       }
-                    },
-                    "size": {
-                      "height": 180
-                    },
-                    "bindto": "#GaugeChart"
-                  }
-                ]
-              </script>
-            </json-merge>
-            <billboard-charts id="bc2" publish data="[[example2]]" selected-element="{{selectedDataPoint}}"></billboard-charts>
-            <br>
-
-          </template>
-
-        </dom-bind>
-      </template>
-    </demo-snippet>
-    
-    
-  </div>
-</body>
-
+                    }
+                  ]
+                </script>              
+              </xtal-json-merge>
+              <xtal-json-merge input="{}" merged-prop="{{newData}}" delay="2000">
+                <script type="application/json">
+                  [
+                    {
+                      "columns": [
+                        ["Despacito", 230, 190, 300, 500, 300, 400]
+                      ]
+                    }
+                  ]
+                </script>
+              </xtal-json-merge>
+              <xtal-json-merge input="{}" merged-prop="{{newData}}" delay="3500">
+                <script type="application/json">
+                  [
+                    {
+                      "columns": [
+                        ["Believer", 130, 150, 200, 300, 200, 100]
+                      ]
+                    }
+                  ]
+                </script>
+              </xtal-json-merge>
+              <xtal-json-merge input="{}" merged-prop="{{staleData}}" delay="6500">
+                <script type="application/json">
+                  [
+                    {
+                      "ids": "Bodak Yellow (Money Moves)"
+                    }
+                  ]
+                </script>
+              </xtal-json-merge>
+              <!-- <input type="checkbox" checked="{{toggle::change}}">
+              <template is="dom-if" if="[[toggle]]"> -->
+                <billboard-charts id="bc" publish data="[[example1]]" new-data="[[newData]]" stale-data="[[staleData]]" selected-element="{{selectedDataPoint}}"></billboard-charts>
+              <!-- </template> -->
+              
+              <template is="dom-if" if="[[selectedDataPoint]]">
+                  <xtal-json-editor options="{}" input="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
+              </template>
+              <xtal-json-merge input="[]" merged-prop="{{example2}}">
+                <script type="application/json">
+                  [
+                    {
+                      "data": {
+                        "columns": [
+                          ["data", 91.4]
+                        ],
+                        "type": "gauge"
+                      },
+                      "gauge": {},
+                      "color": {
+                        "pattern": [
+                          "#FF0000",
+                          "#F97600",
+                          "#F6C600",
+                          "#60B044"
+                        ],
+                        "threshold": {
+                          "values": [
+                            30,
+                            60,
+                            90,
+                            100
+                          ]
+                        }
+                      },
+                      "size": {
+                        "height": 180
+                      },
+                      "bindto": "#GaugeChart"
+                    }
+                  ]
+                </script>
+              </xtal-json-merge>
+              <billboard-charts id="bc2" publish data="[[example2]]" selected-element="{{selectedDataPoint}}"></billboard-charts>
+              <br>
+  
+            </template>
+  
+          </dom-bind>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
 </html>
