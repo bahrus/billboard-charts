@@ -96,47 +96,45 @@
         </xtal-insert-json>
         <p-d on="merged-prop-changed" to="{staleData}"></p-d>
         <billboard-charts publish id="bc"  selected-element="{{selectedDataPoint}}"></billboard-charts>
-        <!-- </template> -->
-
-        <template is="dom-if" if="[[selectedDataPoint]]">
-          <xtal-json-editor options="{}" input="[[selectedDataPoint]]" height="300px"></xtal-json-editor>
-        </template>
-        <xtal-json-merge input="[]" merged-prop="{{example2}}">
+        <p-d on="selected-element-changed" to="{input}"></p-d>
+        <xtal-json-editor options="{}"  height="300px"></xtal-json-editor>
+        <xtal-insert-json input="[]">
           <script type="application/json">
-                  [
-                    {
-                      "data": {
-                        "columns": [
-                          ["data", 91.4]
-                        ],
-                        "type": "gauge"
-                      },
-                      "gauge": {},
-                      "color": {
-                        "pattern": [
-                          "#FF0000",
-                          "#F97600",
-                          "#F6C600",
-                          "#60B044"
-                        ],
-                        "threshold": {
-                          "values": [
-                            30,
-                            60,
-                            90,
-                            100
-                          ]
-                        }
-                      },
-                      "size": {
-                        "height": 180
-                      },
-                      "bindto": "#GaugeChart"
-                    }
-                  ]
-                </script>
-        </xtal-json-merge>
-        <billboard-charts id="bc2" publish data="[[example2]]" selected-element="{{selectedDataPoint}}"></billboard-charts>
+            [
+              {
+                "data": {
+                  "columns": [
+                    ["data", 91.4]
+                  ],
+                  "type": "gauge"
+                },
+                "gauge": {},
+                "color": {
+                  "pattern": [
+                    "#FF0000",
+                    "#F97600",
+                    "#F6C600",
+                    "#60B044"
+                  ],
+                  "threshold": {
+                    "values": [
+                      30,
+                      60,
+                      90,
+                      100
+                    ]
+                  }
+                },
+                "size": {
+                  "height": 180
+                },
+                "bindto": "#GaugeChart"
+              }
+            ]
+          </script>
+        </xtal-insert-json>
+        <p-d on="merged-prop-changed" to="{data}"></p-d>
+        <billboard-charts id="bc2" publish selected-element="{{selectedDataPoint}}"></billboard-charts>
         <br>
 
       </template>
