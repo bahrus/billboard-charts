@@ -85,152 +85,152 @@
             initBillboardCharts();
         });
     }
-    function initBillboardCharts() {
-        /**
-         * `billboard-charts`
-         *  Web component wrapper around billboard.js charting library
-         *
-         * @customElement
-         * @polymer
-         * @demo demo/index.html
-         */
-        class BillboardCharts extends HTMLElement {
-            get publish() {
-                return this._publish;
+    /**
+     * `billboard-charts`
+     *  Web component wrapper around billboard.js charting library
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class BillboardCharts extends HTMLElement {
+        get publish() {
+            return this._publish;
+        }
+        set publish(val) {
+            if (val) {
+                this.setAttribute('publish', '');
             }
-            set publish(val) {
-                if (val) {
-                    this.setAttribute('publish', '');
-                }
-                else {
-                    this.removeAttribute('publish');
-                }
-            }
-            get data() {
-                return this._data;
-            }
-            set data(val) {
-                //debugger;
-                this._data = val;
-                this.onPropsChange();
-            }
-            get newData() {
-                return this._newData;
-            }
-            set newData(val) {
-                this._newData = val;
-                //this.onPropsChange();
-                this.onNewData();
-            }
-            get staleData() {
-                return this._staleData;
-            }
-            set staleData(val) {
-                this._staleData = val;
-                //this.onPropsChange();
-                this.onStaleData();
-            }
-            set selectedElement(val) {
-                this._selectedElement = val;
-                const newEvent = new CustomEvent('selected-element-changed', {
-                    detail: {
-                        value: val
-                    },
-                    bubbles: true,
-                    composed: true
-                });
-                this.dispatchEvent(newEvent);
-            }
-            get selectedElement() {
-                return this._selectedElement;
-            }
-            static get observedAttributes() {
-                return ['publish', 'data', 'newData', 'staleData'];
-            }
-            static get is() { return 'billboard-charts'; }
-            constructor() {
-                super();
-                this.attachShadow({ mode: 'open' });
-                this.shadowRoot.appendChild(template.content.cloneNode(true));
-            }
-            _upgradeProperty(prop) {
-                if (this.hasOwnProperty(prop)) {
-                    let value = this[prop];
-                    delete this[prop];
-                    this[prop] = value;
-                }
-            }
-            attributeChangedCallback(name, oldValue, newValue) {
-                switch (name) {
-                    case 'publish':
-                        this._publish = newValue !== null;
-                        this.onPropsChange();
-                        break;
-                    default:
-                        this['_' + this.snakeToCamel(name)] = newValue;
-                }
-            }
-            get chart() {
-                return this._chart;
-            }
-            snakeToCamel(s) {
-                return s.replace(/(\-\w)/g, function (m) { return m[1].toUpperCase(); });
-            }
-            connectedCallback() {
-                BillboardCharts.observedAttributes.forEach(attrib => {
-                    this._upgradeProperty(this.snakeToCamel(attrib));
-                });
-                // if (!this.cssPath) {
-                //     this.cssPath = base +  '/billboard.min.css';
-                // }
-                // //<link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
-                // const link = document.createElement('link');
-                // link.setAttribute('rel', 'stylesheet');
-                // link.setAttribute('type', "text/css");
-                // link.setAttribute('href', this._cssPath);
-                // link.addEventListener('load', e => {
-                //     this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
-                //     if(this._chart) this._chart.resize();
-                // });
-                // this.shadowRoot.appendChild(link);
-            }
-            // loaded() {
-            //     this._cssLoaded = true;
-            //     setTimeout(() => this.onPropsChange(), 100);
-            //     //this.onPropsChange();
-            // }
-            onPropsChange() {
-                //if (!this._cssLoaded) return;
-                if (!this.publish || !this.data || !this.data.data)
-                    return;
-                this.data.bindto = this.shadowRoot.getElementById('chartTarget');
-                if (!this.data.data.onclick) {
-                    //debugger;
-                    this.data.data.onclick = (dataPoint, element) => {
-                        //this['_setSelectedElement'](dataPoint);
-                        this.selectedElement = dataPoint;
-                    };
-                }
-                if (!this._chart) {
-                    this._chart = bb.generate(this.data);
-                    if (this.newData)
-                        this.onNewData();
-                }
-                else {
-                    this._chart = bb.generate(this.data);
-                }
-            }
-            onNewData() {
-                if (this.newData && this._chart) {
-                    this._chart.load(this.newData);
-                }
-            }
-            onStaleData() {
-                if (this.staleData && this._chart) {
-                    this._chart.unload(this.staleData);
-                }
+            else {
+                this.removeAttribute('publish');
             }
         }
+        get data() {
+            return this._data;
+        }
+        set data(val) {
+            //debugger;
+            this._data = val;
+            this.onPropsChange();
+        }
+        get newData() {
+            return this._newData;
+        }
+        set newData(val) {
+            this._newData = val;
+            //this.onPropsChange();
+            this.onNewData();
+        }
+        get staleData() {
+            return this._staleData;
+        }
+        set staleData(val) {
+            this._staleData = val;
+            //this.onPropsChange();
+            this.onStaleData();
+        }
+        set selectedElement(val) {
+            this._selectedElement = val;
+            const newEvent = new CustomEvent('selected-element-changed', {
+                detail: {
+                    value: val
+                },
+                bubbles: true,
+                composed: true
+            });
+            this.dispatchEvent(newEvent);
+        }
+        get selectedElement() {
+            return this._selectedElement;
+        }
+        static get observedAttributes() {
+            return ['publish', 'data', 'newData', 'staleData'];
+        }
+        static get is() { return 'billboard-charts'; }
+        constructor() {
+            super();
+            this.attachShadow({ mode: 'open' });
+            this.shadowRoot.appendChild(template.content.cloneNode(true));
+        }
+        _upgradeProperty(prop) {
+            if (this.hasOwnProperty(prop)) {
+                let value = this[prop];
+                delete this[prop];
+                this[prop] = value;
+            }
+        }
+        attributeChangedCallback(name, oldValue, newValue) {
+            switch (name) {
+                case 'publish':
+                    this._publish = newValue !== null;
+                    this.onPropsChange();
+                    break;
+                default:
+                    this['_' + this.snakeToCamel(name)] = newValue;
+            }
+        }
+        get chart() {
+            return this._chart;
+        }
+        snakeToCamel(s) {
+            return s.replace(/(\-\w)/g, function (m) { return m[1].toUpperCase(); });
+        }
+        connectedCallback() {
+            BillboardCharts.observedAttributes.forEach(attrib => {
+                this._upgradeProperty(this.snakeToCamel(attrib));
+            });
+            // if (!this.cssPath) {
+            //     this.cssPath = base +  '/billboard.min.css';
+            // }
+            // //<link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
+            // const link = document.createElement('link');
+            // link.setAttribute('rel', 'stylesheet');
+            // link.setAttribute('type', "text/css");
+            // link.setAttribute('href', this._cssPath);
+            // link.addEventListener('load', e => {
+            //     this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
+            //     if(this._chart) this._chart.resize();
+            // });
+            // this.shadowRoot.appendChild(link);
+        }
+        // loaded() {
+        //     this._cssLoaded = true;
+        //     setTimeout(() => this.onPropsChange(), 100);
+        //     //this.onPropsChange();
+        // }
+        onPropsChange() {
+            //if (!this._cssLoaded) return;
+            if (!this.publish || !this.data || !this.data.data)
+                return;
+            this.data.bindto = this.shadowRoot.getElementById('chartTarget');
+            if (!this.data.data.onclick) {
+                //debugger;
+                this.data.data.onclick = (dataPoint, element) => {
+                    //this['_setSelectedElement'](dataPoint);
+                    this.selectedElement = dataPoint;
+                };
+            }
+            if (!this._chart) {
+                this._chart = bb.generate(this.data);
+                if (this.newData)
+                    this.onNewData();
+            }
+            else {
+                this._chart = bb.generate(this.data);
+            }
+        }
+        onNewData() {
+            if (this.newData && this._chart) {
+                this._chart.load(this.newData);
+            }
+        }
+        onStaleData() {
+            if (this.staleData && this._chart) {
+                this._chart.unload(this.staleData);
+            }
+        }
+    }
+    function initBillboardCharts() {
         customElements.define(BillboardCharts.is, BillboardCharts);
     }
 })();

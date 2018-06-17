@@ -53,7 +53,7 @@ declare var billboard_charts: HTMLLinkElement;
     const template = document.createElement('template');
     // <link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
 
-    
+
     const base = cs_src.split('/').slice(0, -1).join('/');
     const refs = [] as IDynamicJSLoadStep[];
     if (typeof (d3) !== 'object') {
@@ -64,8 +64,8 @@ declare var billboard_charts: HTMLLinkElement;
         const bbPath = self['_bb'] ? _bb.href : base + '/billboard.min.js';
         refs.push({ src: bbPath });
     }
-    function loadCssPaths(links: HTMLLinkElement[], css: string[]){
-        if(links.length === 0){
+    function loadCssPaths(links: HTMLLinkElement[], css: string[]) {
+        if (links.length === 0) {
             template.innerHTML = `
             <style>
                  :host {
@@ -78,23 +78,23 @@ declare var billboard_charts: HTMLLinkElement;
             return;
         }
         const link = links.pop();
-        fetch(link.href,{credentials: 'same-origin'}).then(resp =>{
-            resp.text().then(txt =>{
+        fetch(link.href, { credentials: 'same-origin' }).then(resp => {
+            resp.text().then(txt => {
                 css.push(txt);
                 loadCssPaths(links, css);
             })
         })
 
     }
-    function loadCss(){
+    function loadCss() {
         let links = [].slice.call(document.head.querySelectorAll('.billboard.css'));
-        if(links.length === 0){
+        if (links.length === 0) {
             links = [{
                 href: 'https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css'
             }]
         }
         loadCssPaths(links, []);
-        
+
     }
     if (document.readyState !== "loading") {
         loadCss();
@@ -103,189 +103,187 @@ declare var billboard_charts: HTMLLinkElement;
             loadCss();
         });
     }
-    function downloadJSFiles(){
+    function downloadJSFiles() {
         downloadJSFilesInParallelButLoadInSequence(refs).then(() => {
             initBillboardCharts();
         })
     }
 
+    /**
+     * `billboard-charts`
+     *  Web component wrapper around billboard.js charting library
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class BillboardCharts extends HTMLElement implements IBillboardChartsProperties {
+        //static d3Selector;
+        //static billboardJsSelector;
+        //static bbCssSelector;
+        _publish: boolean;
 
-    function initBillboardCharts() {
-
-        /**
-         * `billboard-charts`
-         *  Web component wrapper around billboard.js charting library
-         *
-         * @customElement
-         * @polymer
-         * @demo demo/index.html
-         */
-        class BillboardCharts extends HTMLElement implements IBillboardChartsProperties {
-            //static d3Selector;
-            //static billboardJsSelector;
-            //static bbCssSelector;
-            _publish: boolean;
-
-            get publish() {
-                return this._publish;
-            }
-            set publish(val) {
-                if (val) {
-                    this.setAttribute('publish', '');
-                } else {
-                    this.removeAttribute('publish');
-                }
-
+        get publish() {
+            return this._publish;
+        }
+        set publish(val) {
+            if (val) {
+                this.setAttribute('publish', '');
+            } else {
+                this.removeAttribute('publish');
             }
 
+        }
 
 
-            _data: any;
-            get data() {
-                return this._data;
-            }
-            set data(val) {
-                //debugger;
-                this._data = val;
-                this.onPropsChange();
-            }
 
-            _newData: object;
-            get newData() {
-                return this._newData;
-            }
-            set newData(val) {
-                this._newData = val;
-                //this.onPropsChange();
-                this.onNewData();
-            }
+        _data: any;
+        get data() {
+            return this._data;
+        }
+        set data(val) {
+            //debugger;
+            this._data = val;
+            this.onPropsChange();
+        }
 
-            _staleData: object;
-            get staleData() {
-                return this._staleData;
-            }
-            set staleData(val) {
-                this._staleData = val;
-                //this.onPropsChange();
-                this.onStaleData();
-            }
+        _newData: object;
+        get newData() {
+            return this._newData;
+        }
+        set newData(val) {
+            this._newData = val;
+            //this.onPropsChange();
+            this.onNewData();
+        }
 
-            _selectedElement;
-            set selectedElement(val) {
-                this._selectedElement = val;
-                const newEvent = new CustomEvent('selected-element-changed', {
-                    detail: {
-                        value: val
-                    },
-                    bubbles: true,
-                    composed: true
-                } as CustomEventInit);
-                this.dispatchEvent(newEvent);
-            }
+        _staleData: object;
+        get staleData() {
+            return this._staleData;
+        }
+        set staleData(val) {
+            this._staleData = val;
+            //this.onPropsChange();
+            this.onStaleData();
+        }
 
-            get selectedElement() {
-                return this._selectedElement
-            }
+        _selectedElement;
+        set selectedElement(val) {
+            this._selectedElement = val;
+            const newEvent = new CustomEvent('selected-element-changed', {
+                detail: {
+                    value: val
+                },
+                bubbles: true,
+                composed: true
+            } as CustomEventInit);
+            this.dispatchEvent(newEvent);
+        }
 
-            private _chart: any;
+        get selectedElement() {
+            return this._selectedElement
+        }
 
-            static get observedAttributes() {
-                return ['publish', 'data', 'newData', 'staleData'];
-            }
+        private _chart: any;
 
-            static get is() { return 'billboard-charts'; }
+        static get observedAttributes() {
+            return ['publish', 'data', 'newData', 'staleData'];
+        }
 
-            constructor() {
-                super();
-                this.attachShadow({ mode: 'open' });
-                this.shadowRoot.appendChild(template.content.cloneNode(true));
+        static get is() { return 'billboard-charts'; }
 
-            }
-            _upgradeProperty(prop) {
-                if (this.hasOwnProperty(prop)) {
-                    let value = this[prop];
-                    delete this[prop];
-                    this[prop] = value;
-                }
-            }
-            attributeChangedCallback(name, oldValue, newValue) {
-                
-                switch (name) {
+        constructor() {
+            super();
+            this.attachShadow({ mode: 'open' });
+            this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-                    case 'publish':
-                        this._publish = newValue !== null;
-                        this.onPropsChange();
-                        break;
-                    default:
-                        this['_' + this.snakeToCamel(name)] = newValue;
-                }
-
-            }
-            get chart() {
-                return this._chart;
-            }
-
-
-            snakeToCamel(s) {
-                return s.replace(/(\-\w)/g, function (m) { return m[1].toUpperCase(); });
-            }
-
-            connectedCallback() {
-                BillboardCharts.observedAttributes.forEach(attrib => {
-                    this._upgradeProperty(this.snakeToCamel(attrib));
-                });
-                // if (!this.cssPath) {
-                //     this.cssPath = base +  '/billboard.min.css';
-                // }
-
-                // //<link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
-                // const link = document.createElement('link');
-                // link.setAttribute('rel', 'stylesheet');
-                // link.setAttribute('type', "text/css");
-                // link.setAttribute('href', this._cssPath);
-                // link.addEventListener('load', e => {
-                //     this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
-                //     if(this._chart) this._chart.resize();
-                // });
-                // this.shadowRoot.appendChild(link);
-            }
-
-            // loaded() {
-            //     this._cssLoaded = true;
-            //     setTimeout(() => this.onPropsChange(), 100);
-            //     //this.onPropsChange();
-            // }
-            onPropsChange() {
-                //if (!this._cssLoaded) return;
-                if (!this.publish || !this.data || !this.data.data) return;
-                this.data.bindto = this.shadowRoot.getElementById('chartTarget');
-                if (!this.data.data.onclick) {
-                    //debugger;
-                    this.data.data.onclick = (dataPoint, element) => {
-                        //this['_setSelectedElement'](dataPoint);
-                        this.selectedElement = dataPoint;
-
-                    }
-                }
-                if (!this._chart) {
-                    this._chart = bb.generate(this.data);
-                    if (this.newData) this.onNewData();
-                } else {
-                    this._chart = bb.generate(this.data);
-                }
-
-            }
-            onNewData() {
-                if (this.newData && this._chart) {
-                    this._chart.load(this.newData);
-                }
-            }
-            onStaleData() {
-                if (this.staleData && this._chart) {
-                    this._chart.unload(this.staleData);
-                }
+        }
+        _upgradeProperty(prop) {
+            if (this.hasOwnProperty(prop)) {
+                let value = this[prop];
+                delete this[prop];
+                this[prop] = value;
             }
         }
+        attributeChangedCallback(name, oldValue, newValue) {
+
+            switch (name) {
+
+                case 'publish':
+                    this._publish = newValue !== null;
+                    this.onPropsChange();
+                    break;
+                default:
+                    this['_' + this.snakeToCamel(name)] = newValue;
+            }
+
+        }
+        get chart() {
+            return this._chart;
+        }
+
+
+        snakeToCamel(s) {
+            return s.replace(/(\-\w)/g, function (m) { return m[1].toUpperCase(); });
+        }
+
+        connectedCallback() {
+            BillboardCharts.observedAttributes.forEach(attrib => {
+                this._upgradeProperty(this.snakeToCamel(attrib));
+            });
+            // if (!this.cssPath) {
+            //     this.cssPath = base +  '/billboard.min.css';
+            // }
+
+            // //<link rel="stylesheet" on-load="loaded" type="text/css" href$="[[cssPath]]">
+            // const link = document.createElement('link');
+            // link.setAttribute('rel', 'stylesheet');
+            // link.setAttribute('type', "text/css");
+            // link.setAttribute('href', this._cssPath);
+            // link.addEventListener('load', e => {
+            //     this.shadowRoot.getElementById('chartTarget').style.visibility = 'visible';
+            //     if(this._chart) this._chart.resize();
+            // });
+            // this.shadowRoot.appendChild(link);
+        }
+
+        // loaded() {
+        //     this._cssLoaded = true;
+        //     setTimeout(() => this.onPropsChange(), 100);
+        //     //this.onPropsChange();
+        // }
+        onPropsChange() {
+            //if (!this._cssLoaded) return;
+            if (!this.publish || !this.data || !this.data.data) return;
+            this.data.bindto = this.shadowRoot.getElementById('chartTarget');
+            if (!this.data.data.onclick) {
+                //debugger;
+                this.data.data.onclick = (dataPoint, element) => {
+                    //this['_setSelectedElement'](dataPoint);
+                    this.selectedElement = dataPoint;
+
+                }
+            }
+            if (!this._chart) {
+                this._chart = bb.generate(this.data);
+                if (this.newData) this.onNewData();
+            } else {
+                this._chart = bb.generate(this.data);
+            }
+
+        }
+        onNewData() {
+            if (this.newData && this._chart) {
+                this._chart.load(this.newData);
+            }
+        }
+        onStaleData() {
+            if (this.staleData && this._chart) {
+                this._chart.unload(this.staleData);
+            }
+        }
+    }
+    function initBillboardCharts() {
         customElements.define(BillboardCharts.is, BillboardCharts);
     }
 
