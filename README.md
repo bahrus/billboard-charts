@@ -9,7 +9,7 @@ Web component interface to billboard.js - a charting library forked from c3, whi
     <script async src="https://unpkg.com/xtal-json-editor@0.0.19/build/ES6/xtal-json-editor.js"></script>
     <script type="module" async src="https://unpkg.com/xtal-json-merge@0.2.21/xtal-insert-json.js?module"></script>
     <script type="module" async src="https://unpkg.com/p-d.p-u@0.0.10/p-d.js?module"></script>
-    <script src="../billboard-charts.js"></script>
+    <script src="https://unpkg.com/billboard-charts@0.1.18/billboard-charts.js"></script>
     <div>
         Click on a data point to see the data element below.
         <xtal-insert-json delay="1000" pass-thru-on-init input="{}" >
