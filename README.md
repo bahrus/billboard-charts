@@ -1,6 +1,9 @@
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/bahrus/billboard-charts)
+
+<a href="https://nodei.co/npm/billboard-charts/"><img src="https://nodei.co/npm/billboard-charts.png"></a>
 # \<billboard-charts\>
 
-Web component interface to billboard.js - a charting library forked from c3, which uses d3
+Web component interface to billboard.js - the [hit charting library](https://naver.github.io/billboard.js/) forked from c3, which uses d3
 
 <!--
 ```
