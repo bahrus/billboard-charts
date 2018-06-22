@@ -5,12 +5,12 @@
  * billboard.js, JavaScript chart library
  * http://naver.github.io/billboard.js/
  * 
- * @version 1.4.1
+ * @version 1.5.0
  */
 /*-- Chart --*/
 .bb svg {
   font: 10px sans-serif;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 .bb path, .bb line {
   fill: none;
@@ -167,6 +167,27 @@
 
 .bb-chart-arc .bb-gauge-value {
   fill: #000; }
+
+/*-- Radar --*/
+.bb-chart-radars .bb-levels polygon {
+  fill: none;
+  stroke: #848282;
+  stroke-width: .5px; }
+
+.bb-chart-radars .bb-levels text {
+  fill: #848282; }
+
+.bb-chart-radars .bb-axis line {
+  stroke: #848282;
+  stroke-width: .5px; }
+
+.bb-chart-radars .bb-axis text {
+  font-size: 1.15em;
+  cursor: default; }
+
+.bb-chart-radars .bb-shapes polygon {
+  fill-opacity: .2;
+  stroke-width: 1px; }
 
 
 /*# sourceMappingURL=billboard.css.map*/

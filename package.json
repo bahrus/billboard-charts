@@ -10,7 +10,7 @@
   "dependencies": {
     "@polymer/polymer": "^3.0.0",
     "@types/node": "^10.1.0",
-    "billboard.js": "^1.4.1"
+    "billboard.js": "^1.5.0"
   },
   "devDependencies": {
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
@@ -19,5 +19,11 @@
   },
   "scripts": {
     "postinstall": "node copyBB"
+  },
+  "resolutions": {
+    "commander": "2.15.1",
+    "type-detect": "1.0.0",
+    "supports-color": "3.1.2",
+    "samsam": "1.1.2"
   }
 }
