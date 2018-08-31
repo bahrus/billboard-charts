@@ -1,6 +1,9 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/bahrus/billboard-charts)
 
 <a href="https://nodei.co/npm/billboard-charts/"><img src="https://nodei.co/npm/billboard-charts.png"></a>
+
+<img src="http://img.badgesize.io/https://unpkg.com/billboard-charts@0.1.21/build/ES6/billboard-charts.js?compression=gzip">
+
 # \<billboard-charts\>
 
 Web component interface to billboard.js - the [hit charting library](https://naver.github.io/billboard.js/) forked from c3, which uses d3
@@ -9,13 +12,13 @@ Web component interface to billboard.js - the [hit charting library](https://nav
 ```
 <custom-element-demo>
   <template>
-  <div class="vertical-section-container centered">
+  <div>
     <!-- For Retro Browsers -->
     <script src="https://unpkg.com/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <!-- End Polyfills -->
-    <script type="module" src="https://unpkg.com/xtal-json-editor@0.0.29/xtal-json-editor.js"></script>
-    <script type="module" src="https://unpkg.com/xtal-json-merge@0.2.24/json-merge.js"></script>
-    <script type="module" src="https://unpkg.com/p-d.p-u@0.0.54/p-all.iife.js?module"></script>
+   <script type="module" src="https://unpkg.com/xtal-json-editor@0.0.29/xtal-json-editor.js"></script>
+    <script type="module" src="https://unpkg.com/xtal-json-merge@0.2.28/json-merge.js"></script>
+    <script type="module" src="https://unpkg.com/p-d.p-u@0.0.67/p-all.iife.js?module"></script>
     <script src="https://unpkg.com/billboard-charts@0.1.20/billboard-charts.js"></script>
     <h3>Basic billboard-charts demo</h3>
     Click on a data point to see the data element below.

@@ -12,5 +12,5 @@ bb_files.forEach(file =>{
     fs.copyFileSync('node_modules/billboard.js/dist/' + file, file);
 })
 d3_files.forEach(file =>{
-    fs.copyFileSync('node_modules/d3/dist/' + file, file);
+    fs.copyFileSync('node_modules/billboard.js/node_modules/d3/dist/' + file, file);
 })
