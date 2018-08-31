@@ -1,7 +1,7 @@
 {
   "name": "billboard-charts",
   "flat": true,
-  "version": "0.1.22",
+  "version": "0.1.28",
   "description": "Web component interface to billboard.js - a charting library forked from c3, which uses d3",
   "main": "billboard-charts.js",
   "repository": "https://github.com/bahrus/billboard-charts",
