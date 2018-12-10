@@ -4,6 +4,7 @@
   "version": "0.1.29",
   "description": "Web component interface to billboard.js - a charting library forked from c3, which uses d3",
   "main": "billboard-charts.js",
+  "module": "billboard-charts.js",
   "repository": "https://github.com/bahrus/billboard-charts",
   "author": "bahrus <anderson.bruce.b@gmail.com>",
   "license": "MIT",
