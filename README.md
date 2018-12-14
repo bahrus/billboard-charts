@@ -139,7 +139,7 @@ Web component interface to billboard.js - the [hit charting library](https://nav
 <custom-element-demo>
 <template>
     <div>
-        <wc-info package-name="npm.wc-info" href="https://unpkg.com/billboard-charts@0.1.30/web-components.json"></wc-info>
+        <wc-info package-name="npm install billboard-charts" href="https://unpkg.com/billboard-charts@0.1.30/web-components.json"></wc-info>
         <script type="module" src="https://unpkg.com/wc-info@0.0.12/wc-info.js?module"></script>
     </div>
 </template>
