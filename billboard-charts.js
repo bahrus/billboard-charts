@@ -144,7 +144,7 @@
             return this._selectedElement;
         }
         static get observedAttributes() {
-            return ['publish', 'data', 'newData', 'staleData'];
+            return ['publish'];
         }
         static get is() { return 'billboard-charts'; }
         constructor() {

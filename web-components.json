@@ -1,0 +1,15 @@
+{
+    "tags": [
+        {
+            "label": "billboard-charts",
+            "description": "Web component wrapper around billboard.js charting library",
+            "attributes": [
+                {
+                    "label": "publish",
+                    "description": "Must be present/true to do anything"
+                }
+
+            ]
+        }
+    ]
+}

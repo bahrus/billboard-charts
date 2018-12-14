@@ -187,7 +187,7 @@ declare var billboard_charts: HTMLLinkElement;
         private _chart: any;
 
         static get observedAttributes() {
-            return ['publish', 'data', 'newData', 'staleData'];
+            return ['publish'];
         }
 
         static get is() { return 'billboard-charts'; }
