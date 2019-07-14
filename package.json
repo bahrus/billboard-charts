@@ -9,7 +9,7 @@
   "author": "bahrus <anderson.bruce.b@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "billboard.js": "1.7.0"
+    "billboard.js": "1.9.4"
   },
   "devDependencies": {
     "@types/node": "^10.1.0",
