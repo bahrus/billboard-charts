@@ -11,9 +11,12 @@
   "dependencies": {
     "billboard.js": "1.12.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "xtal-test": "0.0.44"
+  },
   "scripts": {
-    "postinstall": "node copyBB"
+    "postinstall": "node copyBB",
+    "serve": "node node_modules/xtal-test/serve.js"
   },
   "resolutions": {
     "commander": "2.15.1",
