@@ -9,13 +9,9 @@
   "author": "bahrus <anderson.bruce.b@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "billboard.js": "1.9.4"
+    "billboard.js": "1.12.2"
   },
-  "devDependencies": {
-    "@types/node": "^10.1.0",
-    "@webcomponents/webcomponentsjs": "^2.0.0",
-    "p-d.p-u": "0.0.94"
-  },
+  "devDependencies": {},
   "scripts": {
     "postinstall": "node copyBB"
   },
