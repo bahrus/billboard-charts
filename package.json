@@ -9,14 +9,20 @@
   "author": "bahrus <anderson.bruce.b@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "billboard.js": "1.12.2"
+    "billboard.js": "3.14.3",
+    "trans-render": "0.0.884"
   },
   "devDependencies": {
-    "xtal-test": "0.0.44"
+    "@playwright/test": "1.50.1",
+    "may-it-be": "0.0.180",
+    "ssi-server": "0.0.1"
   },
   "scripts": {
-    "postinstall": "node copyBB",
-    "serve": "node node_modules/xtal-test/serve.js"
+    "doc": "node doc.js",
+    "serve": "python3 ./node_modules/ssi-server/ssi_server.py",
+    "test": "playwright test",
+    "safari": "npx playwright wk http://localhost:8000",
+    "update": "ncu -u && npm install"
   },
   "resolutions": {
     "commander": "2.15.1",
